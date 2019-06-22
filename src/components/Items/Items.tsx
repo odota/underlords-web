@@ -12,7 +12,7 @@ export class Items extends React.Component {
             <ErrorBoundary>
                 <table>
                     <tbody>
-                    { Object.keys(items).map( item => <tr>
+                    { Object.keys(items).map( item => <tr key={item}>
                         <td>{item}</td>
                         <td>{items[item as keyof typeof items].tier}</td>
                         <td>{items[item as keyof typeof items].displayName}</td>
