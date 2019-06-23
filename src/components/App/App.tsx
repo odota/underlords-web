@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import Alliances from '../Alliances/Alliances'
-import { Heroes } from '../Heroes/Heroes';
-import { Items } from '../Items/Items';
+import Alliances from '../Alliances/Alliances';
+import Heroes from '../Heroes/Heroes';
+import Items from '../Items/Items';
 
 const App: React.FC = () => {
   return (
