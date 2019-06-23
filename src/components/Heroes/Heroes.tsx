@@ -80,24 +80,29 @@ const HeroCard = ( props: { hero: hero } ) => {
     const hero: any = props.hero;
     return <div className={styles.HeroCard}>
         <div>
-            <div className={styles.Title}>{hero.displayName}</div>
-            <div className={styles.Midtitle}>Tier {hero.draftTier}</div>
-            <div className={styles.Midtitle}>Cost {hero.goldCost}</div>
+            <div className={styles.CardCap}>
+                <img className={styles.HeroImage} src={GetHeroImage(hero.dota_unit_name)} />
+                <div className={styles.CardCapContent}>
+                    <div className={styles.CardCapContentContainer}>
+                        <div className={styles.Title}>{hero.displayName}</div>
+                        <div className={styles.Midtitle}>Tier/Cost {hero.draftTier}</div>
+                    </div>
+                </div>
+            </div>
+            <div className={styles.CardBody}>
+                <div className={styles.Subtitle}>Armor: {hero.armor}</div>
+                <div className={styles.Subtitle}>Attack Range: {hero.attackRange}</div>
+                <div className={styles.Subtitle}>Attack Rate: {hero.attackRate}</div>
+                { /* TODO get the top HP/damage value and show bar relative to max */ }
+                <div className={styles.Subtitle}>Health: {hero.health instanceof Array ? hero.health.join( ' / ') : hero.health }</div>
+                {hero.damageMin && <div>Damage Min: {hero.damageMin instanceof Array ? hero.damageMin.join(' / ') : hero.damageMin}</div>}
+                {hero.damageMax && <div>Damage Max: {hero.damageMax instanceof Array ? hero.damageMax.join(' / ') : hero.damageMax}</div>}
+                <div className={styles.Subtitle}>Alliances: {hero.keywords}</div>
+                { hero.keywords ? 
+                    hero.keywords.split(' ').map( (keyword: string) => <img className={styles.AllianceIcon} src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.jpg`} />) 
+                    : null}
+                <div>{hero.abilities}</div>
+            </div>
         </div>
-        <div className={styles.HeroBackground}>
-            <img className={styles.HeroImage} src={GetHeroImage(hero.dota_unit_name)} />
-        </div>
-        <div className={styles.Subtitle}>Armor: {hero.armor}</div>
-        <div className={styles.Subtitle}>Attack Range: {hero.attackRange}</div>
-        <div className={styles.Subtitle}>Attack Rate: {hero.attackRate}</div>
-        { /* TODO get the top HP/damage value and show bar relative to max */ }
-        <div className={styles.Subtitle}>Health: {hero.health instanceof Array ? hero.health.join( ' / ') : hero.health }</div>
-        {hero.damageMin && <div>Damage Min: {hero.damageMin instanceof Array ? hero.damageMin.join(' / ') : hero.damageMin}</div>}
-        {hero.damageMax && <div>Damage Max: {hero.damageMax instanceof Array ? hero.damageMax.join(' / ') : hero.damageMax}</div>}
-        <div className={styles.Subtitle}>Alliances: {hero.keywords}</div>
-        { hero.keywords ? 
-            hero.keywords.split(' ').map( (keyword: string) => <img className={styles.AllianceIcon} src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.jpg`} />) 
-            : null}
-        <div>{hero.abilities}</div>
     </div>
 }
