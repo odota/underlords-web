@@ -1,6 +1,8 @@
 import React from 'react';
 import alliances from 'dotaconstants/build/underlords_alliances.json';
 import heroes from 'dotaconstants/build/underlords_heroes.json';
+import styles from './Alliances.module.css';
+import commonStyles from '../common.module.css';
 
 export default class Alliances extends React.Component {
 
@@ -19,14 +21,15 @@ export default class Alliances extends React.Component {
   }
 
   render() {
-    return this.state.error ?
-        <div>Error</div> 
-      : this.state.loading ?
-        <div>Loading</div>
-      : <div>
+    if ( this.state.error )
+    {
+      return <div>Error</div> ;
+    }
+    return <div>
           {Object.entries(this.state.alliances).map(([key, val]) => {
-            return <div>
-              <div>{key}</div>
+            return <div className={styles.AllianceCard}>
+              <img src={`${process.env.PUBLIC_URL}/images/alliances/${key}.jpg`} />
+              <div className={commonStyles.Title}>{key}</div>
               <div>{JSON.stringify(val)}</div>
             </div>
           })}

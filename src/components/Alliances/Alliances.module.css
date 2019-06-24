@@ -1,0 +1,10 @@
+.AllianceCard {
+    border-radius: 8px;
+    border: 1px solid green;
+    margin: 8px;
+}
+
+.AllianceIcon {
+    width: 36px;
+    height: 36px;
+}

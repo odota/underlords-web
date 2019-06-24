@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body {
+  background-image: linear-gradient(135deg, rgb(46, 45, 69), rgb(28, 33, 39));
+  color: white;
+}
+
+a {
+  color: white;
+}
+
+table {
+  font-family: -apple-system, BlinkMacSystemFont, Tahoma, "Segoe UI", Roboto, "Droid Sans", Ubuntu, Cantarell, "Fira Sans", Helvetica, Arial, sans-serif;
+}
