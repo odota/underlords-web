@@ -14,6 +14,26 @@ type Abilities = { [key: string]: Ability };
 type GameStrings = { [key: string]: string };
 const ABILITY_REGEX = /({s:[^}]*})/g;
 
+const ABILITY_IMAGE_MAPPING = {
+    "bloodseeker_blood_rage": "bloodseeker_bloodrage",
+    "clockwerk_battery_assault":  "rattletrap_battery_assault",
+    "drow_ranger_trueshot_aura": "drow_ranger_trueshot",
+    "lone_druid_summon_bear": "lone_druid_spirit_link",
+    "lycan_wolf_spawn_shift": "lycan_shapeshift",
+    "natures_prophet_summon_tree": "furion_force_of_nature",
+    "necrophos_death_pulse": "necrolyte_death_pulse",
+    "pudge_meathook": "pudge_meat_hook",
+    "shadow_fiend_requiem": "nevermore_requiem",
+    "techies_bomb": "techies_remote_mines",
+    "terrorblade_metamorph": "terrorblade_metamorphosis",
+    "timbersaw_whirling_death": "shredder_whirling_death"
+};
+
+const ABILITY_NAME_MAPPING = {
+    "medusa_split_shot": "Split Shot",
+    "sandking_caustic_finale": "Caustic Finale"
+};
+
 export default class Heroes extends React.Component {
     state = {
         heroes: [],
@@ -108,14 +128,17 @@ const HeroCard = ( props: { hero: Hero } ) => {
                         return <img className={styles.AllianceIcon} alt={keyword} src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.jpg`} />;
                     }) 
                     : null}
-                { hero.abilities.map( abilityKey => <AbilityCard abilityKey={abilityKey}/> )}
+                {/* reverse abilities because multiple descriptions are merged into the main ability, 
+                    so we show the 2nd one without a description first. */}
+                { hero.abilities.slice(0).reverse().map( abilityKey => <AbilityCard abilityKey={abilityKey}/> )}
             </div>
     </div>
 }
 
 const GetAbilityDescription = (abilityKey: string): string => {
-    let desc: string = (abilityStrings.tokens as GameStrings)[`dac_ability_${abilityKey}_Description`];
-    let ability: Ability = (abilities as Abilities)[abilityKey];
+    let desc: string = (abilityStrings.tokens as GameStrings)[`dac_ability_${abilityKey}_Description`] ||
+    (abilityStrings.tokens as GameStrings)[`dac_ability_${abilityKey}_description`]; //lower case "d"...
+    const ability: Ability = (abilities as Abilities)[abilityKey];
     if (desc) {
         const matches = desc.match(ABILITY_REGEX);
         if (matches) {
@@ -136,16 +159,26 @@ const GetAbilityDescription = (abilityKey: string): string => {
     }
 
 }
+// TODO - fix medusa_split_shot - 2nd skill
+// sandking_caustic_finale - 2nd skill
+// slark_dark_pact - isn't in abilities array for slark... 
 const AbilityCard = ( props: { abilityKey: string} ) => {
     const { abilityKey } = props;
     return <div className={styles.AbilityCard}>
         { /* <div>{hero.abilities}</div> */ }
         <div style={{ display: 'flex' }} className={styles.Subtitle}>
-            <div className={styles.AbilityBackground}>
-                {/*<img src />*/}
+            <div className={styles.AbilityImage}>
+                <img src={GetAbilityImage(abilityKey)} />
             </div>
-            <div>{(gameStrings as GameStrings)[`dac_ability_${abilityKey}`] || abilityKey}</div>
+            <h3>{(abilityStrings.tokens as GameStrings)[`dac_ability_${abilityKey}`] 
+                || ABILITY_NAME_MAPPING[abilityKey as keyof typeof ABILITY_NAME_MAPPING]
+                || abilityKey
+            }</h3>
         </div>
         <p>{GetAbilityDescription(abilityKey)}</p>
     </div>;
+}
+
+const GetAbilityImage = (abilityKey: string): string => {
+    return `https://api.opendota.com/apps/dota2/images/abilities/${ABILITY_IMAGE_MAPPING[abilityKey as keyof typeof ABILITY_IMAGE_MAPPING] || abilityKey}_md.png`
 }

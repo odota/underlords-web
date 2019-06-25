@@ -31,4 +31,9 @@
 .Effect {
     display: inline-block;
     width: 80%;
+    vertical-align: middle;
+}
+
+.HeroImage {
+    margin: 5px;
 }
