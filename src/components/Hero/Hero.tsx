@@ -1,40 +1,14 @@
 import React from 'react';
-import heroes from 'dotaconstants/build/underlords_heroes.json';
-import abilities from 'dotaconstants/build/underlords_abilities.json';
-import abilityStrings from 'dotaconstants/build/underlords_localization_abilities_en.json'
+import heroes from 'underlordsconstants/build/underlords_heroes.json';
+import abilities from 'underlordsconstants/build/underlords_abilities.json';
+import abilityStrings from 'underlordsconstants/build/underlords_localization_abilities_en.json'
 import styles from './Heroes.module.css';
-import commonStyles from '../common.module.css';
+import commonStyles from '../../common.module.css';
+import { ABILITY_NAME_MAPPING, ABILITY_REGEX, ABILITY_IMAGE_MAPPING } from '../../constants';
+import { Hero, GameStrings, Ability, Abilities } from '../../types';
 
-// TODO: Is there a better way to define this?
-// howardc: Not sure why the typing fails if we use keyof typeof heroes, maybe too many different unions confuses TS?
-type HeroType = typeof heroes.abaddon;
-type Ability = typeof abilities[keyof typeof abilities];
-type Abilities = { [key: string]: Ability };
-type GameStrings = { [key: string]: string };
-const ABILITY_REGEX = /({s:[^}]*})/g;
-
-const ABILITY_IMAGE_MAPPING = {
-    "bloodseeker_blood_rage": "bloodseeker_bloodrage",
-    "clockwerk_battery_assault":  "rattletrap_battery_assault",
-    "drow_ranger_trueshot_aura": "drow_ranger_trueshot",
-    "lone_druid_summon_bear": "lone_druid_spirit_link",
-    "lycan_wolf_spawn_shift": "lycan_shapeshift",
-    "natures_prophet_summon_tree": "furion_force_of_nature",
-    "necrophos_death_pulse": "necrolyte_death_pulse",
-    "pudge_meathook": "pudge_meat_hook",
-    "shadow_fiend_requiem": "nevermore_requiem",
-    "techies_bomb": "techies_remote_mines",
-    "terrorblade_metamorph": "terrorblade_metamorphosis",
-    "timbersaw_whirling_death": "shredder_whirling_death"
-};
-
-const ABILITY_NAME_MAPPING = {
-    "medusa_split_shot": "Split Shot",
-    "sandking_caustic_finale": "Caustic Finale"
-};
-
-export default class Hero extends React.Component {
-    constructor(props: { hero: HeroType}) {
+export default class HeroCard extends React.Component<{ hero: Hero }> {
+    constructor(props: { hero: Hero }) {
         super(props);
     }
 
@@ -76,8 +50,8 @@ export default class Hero extends React.Component {
 const GetHeroImage = ( dotaName: string ) => `https://api.opendota.com/apps/dota2/images/heroes/${dotaName.replace('npc_dota_hero_', '')}_full.png?`;
 
 const GetAbilityDescription = (abilityKey: string): string => {
-    let desc: string = (abilityStrings.tokens as GameStrings)[`dac_ability_${abilityKey}_Description`] ||
-    (abilityStrings.tokens as GameStrings)[`dac_ability_${abilityKey}_description`]; //lower case "d"...
+    let desc: string = (abilityStrings as GameStrings)[`dac_ability_${abilityKey}_Description`] ||
+    (abilityStrings as GameStrings)[`dac_ability_${abilityKey}_description`]; //lower case "d"...
     const ability: Ability = (abilities as Abilities)[abilityKey];
     if (desc) {
         const matches = desc.match(ABILITY_REGEX);
@@ -110,7 +84,7 @@ const AbilityCard = ( props: { abilityKey: string} ) => {
             <div className={styles.AbilityImage}>
                 <img src={GetAbilityImage(abilityKey)} />
             </div>
-            <h3>{(abilityStrings.tokens as GameStrings)[`dac_ability_${abilityKey}`] 
+            <h3>{(abilityStrings as GameStrings)[`dac_ability_${abilityKey}`] 
                 || ABILITY_NAME_MAPPING[abilityKey as keyof typeof ABILITY_NAME_MAPPING]
                 || abilityKey
             }</h3>

@@ -1,5 +1,5 @@
 import React from 'react';
-import items from 'dotaconstants/build/underlords_items.json';
+import items from 'underlordsconstants/build/underlords_items.json';
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 
 export default class Items extends React.Component {

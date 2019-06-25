@@ -1,23 +1,16 @@
 import React from 'react';
-import alliances from 'dotaconstants/build/underlords_alliances.json';
-import heroes from 'dotaconstants/build/underlords_heroes.json';
+import alliances from 'underlordsconstants/build/underlords_alliances.json';
+import heroes from 'underlordsconstants/build/underlords_heroes.json';
 import styles from './Alliances.module.css';
-import commonStyles from '../common.module.css';
-import gameStrings from 'dotaconstants/build/underlords_localization_en.json';
+import commonStyles from '../../common.module.css';
+import gameStrings from 'underlordsconstants/build/underlords_localization_en.json';
 import ReactTooltip from 'react-tooltip';
-
-// // TODO: Is there a better way to define this?
-type Hero = typeof heroes.abaddon;
-type Alliance = typeof alliances[keyof typeof alliances] & { 
-  name: string
-  heroes: Hero[]
-};
-type GameStrings = { [key: string]: string };
+import { Alliance, Hero } from '../../types';
 
 export default class Alliances extends React.Component {
 
   state = {
-    alliances: [],
+    alliances: [] as Alliance[],
     heroes: []
   };
 

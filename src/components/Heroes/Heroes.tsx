@@ -1,38 +1,12 @@
 import React from 'react';
-import heroes from 'dotaconstants/build/underlords_heroes.json';
-import abilities from 'dotaconstants/build/underlords_abilities.json';
-import gameStrings from 'dotaconstants/build/underlords_localization_en.json';
-import abilityStrings from 'dotaconstants/build/underlords_localization_abilities_en.json'
+import heroes from 'underlordsconstants/build/underlords_heroes.json';
+import abilities from 'underlordsconstants/build/underlords_abilities.json';
+import gameStrings from 'underlordsconstants/build/underlords_localization_en.json';
+import abilityStrings from 'underlordsconstants/build/underlords_localization_abilities_en.json'
 import styles from './Heroes.module.css';
-import commonStyles from '../common.module.css';
-
-// TODO: Is there a better way to define this?
-// howardc: Not sure why the typing fails if we use keyof typeof heroes, maybe too many different unions confuses TS?
-type Hero = typeof heroes.abaddon;
-type Ability = typeof abilities[keyof typeof abilities];
-type Abilities = { [key: string]: Ability };
-type GameStrings = { [key: string]: string };
-const ABILITY_REGEX = /({s:[^}]*})/g;
-
-const ABILITY_IMAGE_MAPPING = {
-    "bloodseeker_blood_rage": "bloodseeker_bloodrage",
-    "clockwerk_battery_assault":  "rattletrap_battery_assault",
-    "drow_ranger_trueshot_aura": "drow_ranger_trueshot",
-    "lone_druid_summon_bear": "lone_druid_spirit_link",
-    "lycan_wolf_spawn_shift": "lycan_shapeshift",
-    "natures_prophet_summon_tree": "furion_force_of_nature",
-    "necrophos_death_pulse": "necrolyte_death_pulse",
-    "pudge_meathook": "pudge_meat_hook",
-    "shadow_fiend_requiem": "nevermore_requiem",
-    "techies_bomb": "techies_remote_mines",
-    "terrorblade_metamorph": "terrorblade_metamorphosis",
-    "timbersaw_whirling_death": "shredder_whirling_death"
-};
-
-const ABILITY_NAME_MAPPING = {
-    "medusa_split_shot": "Split Shot",
-    "sandking_caustic_finale": "Caustic Finale"
-};
+import commonStyles from '../../common.module.css';
+import { ABILITY_REGEX, ABILITY_NAME_MAPPING, ABILITY_IMAGE_MAPPING } from '../../constants';
+import { Hero, GameStrings, Ability, Abilities } from '../../types';
 
 export default class Heroes extends React.Component {
     state = {
@@ -106,7 +80,7 @@ const HeroCard = ( props: { hero: Hero } ) => {
     // const ability = abilities[hero.abilities[0] as keyof typeof abilities];
     return <div className={commonStyles.Card}>
             <div className={commonStyles.CardCap}>
-                <img className={styles.HeroImage} src={GetHeroImage(hero.dota_unit_name)} />
+                <img className={styles.HeroImage} alt={hero.dota_unit_name} src={GetHeroImage(hero.dota_unit_name)} />
                 <div className={commonStyles.CardCapContent}>
                     <div className={commonStyles.CardCapContentContainer}>
                         <div className={commonStyles.Title}>{hero.displayName}</div>
@@ -130,14 +104,14 @@ const HeroCard = ( props: { hero: Hero } ) => {
                     : null}
                 {/* reverse abilities because multiple descriptions are merged into the main ability, 
                     so we show the 2nd one without a description first. */}
-                { hero.abilities.slice(0).reverse().map( abilityKey => <AbilityCard abilityKey={abilityKey}/> )}
+                { hero.abilities.slice(0).reverse().map( abilityKey => <AbilityCard abilityKey={abilityKey} /> )}
             </div>
     </div>
 }
 
 const GetAbilityDescription = (abilityKey: string): string => {
-    let desc: string = (abilityStrings.tokens as GameStrings)[`dac_ability_${abilityKey}_Description`] ||
-    (abilityStrings.tokens as GameStrings)[`dac_ability_${abilityKey}_description`]; //lower case "d"...
+    let desc: string = (abilityStrings as GameStrings)[`dac_ability_${abilityKey}_Description`] ||
+    (abilityStrings as GameStrings)[`dac_ability_${abilityKey}_description`]; //lower case "d"...
     const ability: Ability = (abilities as Abilities)[abilityKey];
     if (desc) {
         const matches = desc.match(ABILITY_REGEX);
@@ -170,7 +144,7 @@ const AbilityCard = ( props: { abilityKey: string} ) => {
             <div className={styles.AbilityImage}>
                 <img src={GetAbilityImage(abilityKey)} />
             </div>
-            <h3>{(abilityStrings.tokens as GameStrings)[`dac_ability_${abilityKey}`] 
+            <h3>{(abilityStrings as GameStrings)[`dac_ability_${abilityKey}`] 
                 || ABILITY_NAME_MAPPING[abilityKey as keyof typeof ABILITY_NAME_MAPPING]
                 || abilityKey
             }</h3>
