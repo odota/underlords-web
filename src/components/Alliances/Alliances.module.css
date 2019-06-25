@@ -8,3 +8,27 @@
     width: 36px;
     height: 36px;
 }
+
+.UnitCountContainer {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 40px;
+    align-content: flex-start;
+    width: 20%;
+    vertical-align: middle;
+}
+
+.Unit {
+    box-sizing: border-box;
+    height: 45%;
+    width: 10px;
+    border: 1px solid grey;
+    margin: 1px;
+    border-radius: 3px;
+}
+
+.Effect {
+    display: inline-block;
+    width: 80%;
+}

@@ -16,3 +16,64 @@
     font-size: 24px;
     letter-spacing: 1px;
 }
+
+.CardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    overflow: scroll;
+}
+
+.Card {
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    width: 300px;
+    margin: 8px;
+    border-radius: 8px; 
+    color: white;
+    overflow: hidden;
+    border: 1px solid #4a7b35;
+}
+
+.CardCap {
+    margin-bottom: .5rem;
+    position: relative;
+}
+
+.CardCap>img {
+    width: 100%;
+}
+
+.CardCapSmallImage {
+    margin-bottom: .5rem;
+    padding: 0.5rem;
+}
+
+.CardCapSmallImage>img {
+    height: 24px;
+    width: 24px;
+    padding-right: 20px;
+}
+
+.CardCapSmallImage>div {
+    display: inline-block
+}
+
+.CardCapContent {
+    position: absolute;
+    bottom: 2px;
+    left: 0px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    width: 100%;
+}
+
+.CardCapContentContainer {
+    padding: 1rem;
+}
+/* .HeroCardContainer {
+    padding: 1rem;
+} */
+
+.CardBody {
+    padding: 0 1rem 1rem;
+}
