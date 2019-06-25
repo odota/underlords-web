@@ -4,6 +4,7 @@ import heroes from 'dotaconstants/build/underlords_heroes.json';
 import styles from './Alliances.module.css';
 import commonStyles from '../common.module.css';
 import gameStrings from 'dotaconstants/build/underlords_localization_en.json';
+import ReactTooltip from 'react-tooltip';
 
 // // TODO: Is there a better way to define this?
 type Hero = typeof heroes.abaddon;
@@ -73,8 +74,13 @@ export default class Alliances extends React.Component {
                   })}
                 </div>
                 <div>
-                  {alliance.heroes.map((e) => {
-                    return <img className={styles.HeroImage} src={GetHeroImage(e.dota_unit_name)} />
+                  {alliance.heroes.map((e, i) => {
+                    return <div>
+                        <img data-tip data-for={`hero${i}`} className={styles.HeroImage} src={GetHeroImage(e.dota_unit_name)} />
+                        <ReactTooltip id={`hero${i}`} effect="solid" place="bottom">
+                          
+                        </ReactTooltip>
+                      </div>
 
                   })}
                 </div>
