@@ -1,14 +1,3 @@
-.AllianceCard {
-    border-radius: 8px;
-    border: 1px solid green;
-    margin: 8px;
-}
-
-.AllianceIcon {
-    width: 36px;
-    height: 36px;
-}
-
 .UnitCountContainer {
     display: inline-flex;
     flex-direction: column;
@@ -32,8 +21,4 @@
     display: inline-block;
     width: 80%;
     vertical-align: middle;
-}
-
-.HeroImage {
-    margin: 5px;
 }

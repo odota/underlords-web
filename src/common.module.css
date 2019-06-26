@@ -72,10 +72,12 @@
 .CardCapContentContainer {
     padding: 1rem;
 }
-/* .HeroCardContainer {
-    padding: 1rem;
-} */
 
 .CardBody {
     padding: 0 1rem 1rem;
+}
+
+.ImageInRow {
+    margin: 5px;
+    display: inline-block;
 }

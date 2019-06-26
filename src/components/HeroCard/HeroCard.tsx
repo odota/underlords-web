@@ -1,23 +1,20 @@
 import React from 'react';
-import heroes from 'underlordsconstants/build/underlords_heroes.json';
+import ReactTooltip from 'react-tooltip';
 import abilities from 'underlordsconstants/build/underlords_abilities.json';
 import abilityStrings from 'underlordsconstants/build/underlords_localization_abilities_en.json'
-import styles from './Heroes.module.css';
+import styles from './HeroCard.module.css';
 import commonStyles from '../../common.module.css';
 import { ABILITY_NAME_MAPPING, ABILITY_REGEX, ABILITY_IMAGE_MAPPING } from '../../constants';
-import { Hero, GameStrings, Ability, Abilities } from '../../types';
+import { Hero, GameStrings, Ability, Abilities, Alliance } from '../../types';
+import AllianceCard from '../AllianceCard/AllianceCard';
 
-export default class HeroCard extends React.Component<{ hero: Hero }> {
-    constructor(props: { hero: Hero }) {
-        super(props);
-    }
-
+export default class HeroCard extends React.Component<{ hero: Hero, alliances?: Alliance[] }> {
     public render() {
-        const { hero } = this.props;
+        const { hero, alliances } = this.props;
         // const ability = abilities[hero.abilities[0] as keyof typeof abilities];
         return <div className={commonStyles.Card}>
                 <div className={commonStyles.CardCap}>
-                    <img className={styles.HeroImage} src={GetHeroImage(hero.dota_unit_name)} />
+                    <img className={styles.HeroImage} alt={hero.displayName} src={GetHeroImage(hero.dota_unit_name)} />
                     <div className={commonStyles.CardCapContent}>
                         <div className={commonStyles.CardCapContentContainer}>
                             <div className={commonStyles.Title}>{hero.displayName}</div>
@@ -35,13 +32,29 @@ export default class HeroCard extends React.Component<{ hero: Hero }> {
                     {hero.damageMax && <div className={commonStyles.Subtitle}>Damage Max: {hero.damageMax instanceof Array ? hero.damageMax.join(' / ') : hero.damageMax}</div>}
                     <div className={commonStyles.Subtitle}>Alliances: {hero.keywords}</div>
                     { hero.keywords ? 
-                        hero.keywords.split(' ').map( (keyword: string) => {
-                            return <img className={styles.AllianceIcon} alt={keyword} src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.jpg`} />;
+                        hero.keywords.split(' ').map( (keyword: string, i: number) => {
+                            const alliance = alliances ? alliances.find((a) => a.name === keyword) : null;
+                            return <div className={commonStyles.ImageInRow} key={i}>
+                                <img
+                                    data-tip
+                                    data-for={`alliance_${hero.dota_unit_name}${keyword}`}
+                                    className={styles.AllianceIcon}
+                                    alt={keyword}
+                                    src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.jpg`}
+                                />
+                                {
+                                    alliance ?
+                                    <ReactTooltip id={`alliance_${hero.dota_unit_name}${keyword}`} effect="solid" place="bottom">
+                                        <AllianceCard alliance={alliance}/>
+                                    </ReactTooltip>
+                                    : <div/>
+                                }
+                            </div>;
                         }) 
                         : null}
                     {/* reverse abilities because multiple descriptions are merged into the main ability, 
                         so we show the 2nd one without a description first. */}
-                    { hero.abilities.slice(0).reverse().map( abilityKey => <AbilityCard abilityKey={abilityKey}/> )}
+                    { hero.abilities.slice(0).reverse().map((abilityKey, i) => <AbilityCard abilityKey={abilityKey} key={i} /> )}
                 </div>
         </div>
     }
@@ -73,21 +86,19 @@ const GetAbilityDescription = (abilityKey: string): string => {
     }
 
 }
-// TODO - fix medusa_split_shot - 2nd skill
-// sandking_caustic_finale - 2nd skill
-// slark_dark_pact - isn't in abilities array for slark... 
+
 const AbilityCard = ( props: { abilityKey: string} ) => {
     const { abilityKey } = props;
+    const abilityName = (abilityStrings as GameStrings)[`dac_ability_${abilityKey}`] 
+            || ABILITY_NAME_MAPPING[abilityKey as keyof typeof ABILITY_NAME_MAPPING]
+            || abilityKey;
     return <div className={styles.AbilityCard}>
         { /* <div>{hero.abilities}</div> */ }
         <div style={{ display: 'flex' }} className={styles.Subtitle}>
             <div className={styles.AbilityImage}>
-                <img src={GetAbilityImage(abilityKey)} />
+                <img alt={abilityName} src={GetAbilityImage(abilityKey)} />
             </div>
-            <h3>{(abilityStrings as GameStrings)[`dac_ability_${abilityKey}`] 
-                || ABILITY_NAME_MAPPING[abilityKey as keyof typeof ABILITY_NAME_MAPPING]
-                || abilityKey
-            }</h3>
+            <h3>{abilityName}</h3>
         </div>
         <p>{GetAbilityDescription(abilityKey)}</p>
     </div>;
