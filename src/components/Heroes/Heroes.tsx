@@ -13,7 +13,8 @@ export default class Heroes extends React.Component {
     }
 
     public componentDidMount() {
-        let realHeroes: string[] = [], npcs: string[] = [];
+        const realHeroes: string[] = [];
+        const npcs: string[] = [];
 
         Object.entries(heroes).forEach(([k, v]) => {
             if (v.draftTier > 0) {
@@ -34,14 +35,16 @@ export default class Heroes extends React.Component {
     private sortHeroes(by: any) {
         const ascending: boolean = this.state.sort === by ? !this.state.isAscending : true;
         const order: number = ascending ? 1 : -1;
-        let newSort: Hero[] = this.state.heroes
+        let newSort: string[] = this.state.heroes
             .sort((x: string, y: string) => {
-                x = heroes[x] as Hero;
-                y = heroes[y] as Hero;
-                if (x[by] === [by]) {
-                    return order * ((x.displayName as GameStrings)["en"] > (y.displayName as GameStrings)["en"] ? 1 : -1);
-                }
-                return order * (x[by] > y[by] ? 1 : -1);
+                let a = heroes[x as keyof typeof heroes];
+                let b = heroes[x as keyof typeof heroes];
+                // if (a[by as keyof Hero] === b[by as keyof Hero]) {
+                //     return order * ((a.displayName)["en"] > (b.displayName)["en"] ? 1 : -1);
+                // }
+                const first = a[by as keyof Hero] || 0;
+                const second =  b[by as keyof Hero] || 0;
+                return order * (first > second ? 1 : -1);
             });
 
         this.setState({

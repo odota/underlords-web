@@ -15,7 +15,7 @@
     "react-scripts": "3.0.1",
     "react-tooltip": "^3.10.0",
     "typescript": "3.5.2",
-    "underlordsconstants": "github:odota/underlordsconstants"
+    "underlordsconstants": "git+https://github.com/odota/underlordsconstants.git#35c10d22144776a5f63287015bdde1d9368d605b"
   },
   "scripts": {
     "start": "react-scripts start",
