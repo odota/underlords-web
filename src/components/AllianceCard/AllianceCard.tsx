@@ -9,14 +9,17 @@ import HeroCard from '../HeroCard/HeroCard';
 export default class AllianceCard extends React.Component<{ alliance: Alliance }> {
   render() {
     const { alliance } = this.props;
-    const maxUnits = alliance.levels[alliance.levels.length - 1].unitcount;
+    if (!alliance || !alliance.levels || !alliance.heroes) {
+      return null;
+    }
+    const maxUnits = alliance.levels && alliance.levels.length ? alliance.levels[alliance.levels.length - 1].unitcount : 0;
     let needsThreeUnits = false;
-    if (alliance.levels.length > 1) {
+    if (alliance.levels && alliance.levels.length > 1) {
       needsThreeUnits = alliance.levels[1].unitcount - alliance.levels[0].unitcount === 3
-    } else if (alliance.levels[0] && alliance.levels[0].unitcount === 3) {
+    } else if (alliance.levels && alliance.levels[0] && alliance.levels[0].unitcount === 3) {
       needsThreeUnits = true;
     }
-    if (alliance.heroes.length < 1) {
+    if (alliance.heroes && alliance.heroes.length < 1) {
       return <div/> //Satyr doesn't exist yet?
     }
     return <div className={commonStyles.Card}>
@@ -25,7 +28,7 @@ export default class AllianceCard extends React.Component<{ alliance: Alliance }
           <div className={commonStyles.Title}>{alliance.displayName}</div>
         </div>
         <div className={commonStyles.CardBody}>
-          {(alliance.levels as any[]).map((e: any, i: number) => {
+          {alliance.levels.map((e: any, i: number) => {
             return <div key={i}>
                 <UnitIndicator num={e.unitcount} max={maxUnits} color={alliance.color} needsThreeUnits={needsThreeUnits}/>
                 <p className={styles.Effect}>{(gameStrings as GameStrings)[`dac_synergy_desc_${alliance.name}_${i + 1}`]}</p>
@@ -35,7 +38,7 @@ export default class AllianceCard extends React.Component<{ alliance: Alliance }
         <div>
           {alliance.heroes.map((e: Hero, i: number) => {
             return <div className={commonStyles.ImageInRow} key={i}>
-                <img data-tip data-for={`hero${e.dota_unit_name}`} alt={(e.displayName as GameStrings)["en"]} src={GetHeroImage(e.dota_unit_name)} />
+                <img data-tip data-for={`hero${e.dota_unit_name}`} alt={e.displayName} src={GetHeroImage(e.dota_unit_name)} />
                 <ReactTooltip id={`hero${e.dota_unit_name}`} effect="solid" place="bottom">
                   <HeroCard hero={e} embedded={true}/>
                 </ReactTooltip>

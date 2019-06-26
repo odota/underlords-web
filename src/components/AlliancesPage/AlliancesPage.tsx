@@ -1,8 +1,7 @@
 import React from 'react';
 import commonStyles from '../../common.module.css';
 import AllianceCard from '../AllianceCard/AllianceCard';
-import alliances from 'underlordsconstants/build/underlords_alliances.json';
-import { Alliances } from '../../types';
+import { alliances } from '../Localization/Localization';
 
 export default class AlliancesPage extends React.Component {
 
@@ -17,7 +16,7 @@ export default class AlliancesPage extends React.Component {
   render() {
     return <div className={commonStyles.CardsContainer}>
       {this.state.order.map((key: string, i: number) => 
-      <AllianceCard alliance={(alliances as Alliances)[key]} key={i} />)}
+      <AllianceCard alliance={alliances[key]} key={i} />)}
     </div>;
   }
 }

@@ -1,22 +1,18 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
-import heroes from 'underlordsconstants/build/underlords_heroes.json';
+import { heroes, alliances, underlordsLoc, abilitiesLoc } from '../Localization/Localization';
 import abilities from 'underlordsconstants/build/underlords_abilities.json';
-import alliances from 'underlordsconstants/build/underlords_alliances.json';
 import styles from './HeroCard.module.css';
 import commonStyles from '../../common.module.css';
-import { ABILITY_REGEX } from '../../constants';
+import { ABILITY_REGEX, StripHtml } from '../../utils';
 import { Hero, Heroes, GameStrings, Ability, Abilities, Alliance } from '../../types';
 import AllianceCard from '../AllianceCard/AllianceCard';
 
 export default class HeroCard extends React.Component<{ heroKey?: string, embedded: boolean, hero?: Hero }> {
-    state = {
-        lang: 'en'
-    }
 
     public render() {
-        const hero = this.props.hero ? this.props.hero : heroes[this.props.heroKey as keyof typeof heroes];
-        const name = (hero.displayName as GameStrings)[this.state.lang];
+        const hero: Hero = this.props.hero ? this.props.hero : heroes[this.props.heroKey as keyof typeof heroes];
+        const name = underlordsLoc[`${hero.displayName.substring(1)}`];
         return <div className={commonStyles.Card}>
                 <div className={commonStyles.CardCap}>
                     <img className={styles.HeroImage} alt={name} src={GetHeroImage(hero.dota_unit_name)} />
@@ -49,7 +45,7 @@ export default class HeroCard extends React.Component<{ heroKey?: string, embedd
                                 {   this.props.embedded ?
                                     <div />
                                     : <ReactTooltip id={`alliance_${hero.dota_unit_name}${keyword}`} effect="solid" place="bottom">
-                                        <AllianceCard alliance={keyword}/>
+                                        <AllianceCard alliance={alliances[keyword as keyof typeof alliances]}/>
                                     </ReactTooltip>
                                 }
                             </div>;
@@ -72,8 +68,9 @@ const GetHeroImage = ( dotaName: string ) => `https://api.opendota.com/apps/dota
 const AbilityCard = ( props: { abilityKey: string} ) => {
     const { abilityKey } = props;
     const ability: Ability = (abilities as Abilities)[abilityKey];
-    const name = (ability.displayName as GameStrings)["en"];
-    const description = (ability.description as GameStrings)["en"];
+    const name = abilitiesLoc[`dac_ability_${abilityKey}`];
+    const description = StripHtml(abilitiesLoc[`dac_ability_${abilityKey}_Description`]);
+    const lore = StripHtml(abilitiesLoc[`dac_ability_${abilityKey}_Lore`]);
     return <div className={styles.AbilityCard}>
         <div style={{ display: 'flex' }} className={styles.Subtitle}>
             <div className={styles.AbilityImage}>
@@ -82,5 +79,6 @@ const AbilityCard = ( props: { abilityKey: string} ) => {
             <h3>{name}</h3>
         </div>
         <p>{description}</p>
+        <small>{lore}</small>
     </div>;
 }

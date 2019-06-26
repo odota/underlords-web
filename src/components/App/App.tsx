@@ -7,6 +7,7 @@ import { Hero, GameStrings, Alliance, Item } from '../../types';
 import heroes from 'underlordsconstants/build/underlords_heroes.json';
 import items from 'underlordsconstants/build/underlords_items.json';
 import gameStrings from 'underlordsconstants/build/underlords_localization_en.json';
+import { InitLocalization } from '../Localization/Localization';
 
 export default class App extends React.Component {
 
@@ -17,7 +18,9 @@ export default class App extends React.Component {
   }
 
   // TODO - move this logic to constants output
-  public componentDidMount() {
+  public async componentDidMount() {
+    await InitLocalization();
+
     let realHeroes: Hero[] = [];
     let npcs: Hero[] = [];
 
