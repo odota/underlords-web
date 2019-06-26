@@ -3,7 +3,7 @@ import styles from './AllianceCard.module.css';
 import commonStyles from '../../common.module.css';
 import gameStrings from 'underlordsconstants/build/underlords_localization_en.json';
 import ReactTooltip from 'react-tooltip';
-import { Alliance, GameStrings } from '../../types';
+import { Hero, Alliance, GameStrings } from '../../types';
 import HeroCard from '../HeroCard/HeroCard';
 
 export default class AllianceCard extends React.Component<{ alliance: Alliance }> {
@@ -33,11 +33,11 @@ export default class AllianceCard extends React.Component<{ alliance: Alliance }
           })}
         </div>
         <div>
-          {alliance.heroes.map((e, i) => {
+          {alliance.heroes.map((e: Hero, i: number) => {
             return <div className={commonStyles.ImageInRow} key={i}>
-                <img data-tip data-for={`hero${e.dota_unit_name}`} alt={e.displayName} src={GetHeroImage(e.dota_unit_name)} />
+                <img data-tip data-for={`hero${e.dota_unit_name}`} alt={(e.displayName as GameStrings)["en"]} src={GetHeroImage(e.dota_unit_name)} />
                 <ReactTooltip id={`hero${e.dota_unit_name}`} effect="solid" place="bottom">
-                  <HeroCard hero={e}/>
+                  <HeroCard hero={e} embedded={true}/>
                 </ReactTooltip>
               </div>
           })}
