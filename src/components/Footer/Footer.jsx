@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import AppLogo from '../App/AppLogo';
 import PageLinks from './PageLinks';
-// import Cheese from './Cheese';
 import SocialLinks from './SocialLinks';
 import { IconSteam } from '../Icons';
 import constants from '../constants';
+import { strings } from '../Localization/Localization';
 
 const StyledFooter = styled.footer`
   & main {
@@ -170,9 +170,9 @@ const Footer = () => (
           </div>
         </div>
         <small className="about">
-          Open source Dota Underlords data platform
+          { strings.app_description }
           {' - '}
-          powered by
+          {strings.app_powered_by}
           <a href="http://steampowered.com" target="_blank" rel="noopener noreferrer">
             <IconSteam />
           </a>

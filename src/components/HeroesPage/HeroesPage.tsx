@@ -4,7 +4,7 @@ import commonStyles from '../../common.module.css';
 import { Hero } from '../../types';
 import HeroCard from '../HeroCard/HeroCard';
 
-export default class Heroes extends React.Component {
+export default class HeroesPage extends React.Component {
 
     state = {
         heroes: [],

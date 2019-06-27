@@ -7,7 +7,7 @@ import ItemCard from '../ItemCard/ItemCard';
 import { Item } from '../../types';
 
 
-export default class Items extends React.Component {
+export default class ItemsPage extends React.Component {
     
     state = {
         order: Object.keys(items)
@@ -23,9 +23,13 @@ export default class Items extends React.Component {
 
     public render() {
         return <div>
-            <div className={commonStyles.SortButtonsContainer}>
-                <button onClick={(e) => this.sort('draftTier')}>Order by Tier/Cost</button>
-                <button onClick={(e) => this.sort('displayName')}>Order by Name</button>
+            <div className={commonStyles.PageSectionHeader}>
+                <h1>Items</h1>
+                <div className={commonStyles.SortButtonsContainer}>
+                    <h3>Sort</h3>
+                    <button onClick={(e) => this.sort('draftTier')}>Tier/Cost</button>
+                    <button onClick={(e) => this.sort('displayName')}>Name</button>
+                </div>
             </div>
             <ErrorBoundary>
                 <div className={commonStyles.CardsContainer}>

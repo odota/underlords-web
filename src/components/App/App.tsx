@@ -1,15 +1,12 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import AlliancesPage from '../AlliancesPage/AlliancesPage';
-import Heroes from '../Heroes/Heroes';
-import Items from '../Items/Items';
-import { Hero, GameStrings, Alliance, Item } from '../../types';
-import heroes from 'underlordsconstants/build/underlords_heroes.json';
-import items from 'underlordsconstants/build/underlords_items.json';
-import gameStrings from 'underlordsconstants/build/underlords_localization_en.json';
+import HeroesPage from '../HeroesPage/HeroesPage';
+import ItemsPage from '../ItemsPage/ItemsPage';
 import { InitLocalization } from '../Localization/Localization';
 import Header from '../Header';
 import Footer from '../Footer';
+import styles from './App.module.css';
 
 export default class App extends React.Component {
 
@@ -33,11 +30,13 @@ export default class App extends React.Component {
       <div/>
       : <div>
         <Header navbarPages={this.navbarPages} />
-        <Switch>
-          <Route path="/alliances" component={AlliancesPage}/>
-          <Route path="/heroes" component={Heroes}/>
-          <Route path="/items" component={Items} />
-        </Switch>
+        <div className={styles.MainContainer}>
+          <Switch>
+            <Route path="/alliances" component={AlliancesPage}/>
+            <Route path="/heroes" component={HeroesPage}/>
+            <Route path="/items" component={ItemsPage} />
+          </Switch>
+        </div>
         <Footer/>
       </div>;
   }
