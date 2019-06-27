@@ -19,9 +19,7 @@ export default class AllianceCard extends React.Component<{ alliance: Alliance }
     } else if (alliance.levels && alliance.levels[0] && alliance.levels[0].unitcount === 3) {
       needsThreeUnits = true;
     }
-    if (alliance.heroes && alliance.heroes.length < 1) {
-      return <div/> //Satyr doesn't exist yet?
-    }
+
     return <div className={commonStyles.Card}>
         <div className={commonStyles.CardCapSmallImage}>
           <img alt={alliance.name} src={`${process.env.PUBLIC_URL}/images/alliances/${alliance.name}.jpg`} />

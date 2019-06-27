@@ -8,10 +8,10 @@ import { ABILITY_REGEX, StripHtml } from '../../utils';
 import { Hero, Heroes, GameStrings, Ability, Abilities, Alliance } from '../../types';
 import AllianceCard from '../AllianceCard/AllianceCard';
 
-export default class HeroCard extends React.Component<{ heroKey?: string, embedded: boolean, hero?: Hero }> {
+export default class HeroCard extends React.Component<{ hero: Hero, embedded: boolean }> {
 
     public render() {
-        const hero: Hero = this.props.hero ? this.props.hero : heroes[this.props.heroKey as keyof typeof heroes];
+        const { hero, embedded } = this.props;
         const name = underlordsLoc[`${hero.displayName.substring(1)}`];
         return <div className={commonStyles.Card}>
                 <div className={commonStyles.CardCap}>
@@ -42,7 +42,7 @@ export default class HeroCard extends React.Component<{ heroKey?: string, embedd
                                     alt={keyword}
                                     src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.jpg`}
                                 />
-                                {   this.props.embedded ?
+                                {   embedded ?
                                     <div />
                                     : <ReactTooltip id={`alliance_${hero.dota_unit_name}${keyword}`} effect="solid" place="bottom">
                                         <AllianceCard alliance={alliances[keyword as keyof typeof alliances]}/>

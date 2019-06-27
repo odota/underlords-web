@@ -7,7 +7,8 @@ import HeroCard from '../HeroCard/HeroCard';
 export default class Heroes extends React.Component {
 
     state = {
-        heroes: Object.keys(heroes),
+        heroes: [],
+        npcs: [],
         sort: 'displayName',
         isAscending: false //so that it's ascending on componentMount
     }
@@ -39,9 +40,6 @@ export default class Heroes extends React.Component {
             .sort((x: string, y: string) => {
                 let a = heroes[x as keyof typeof heroes];
                 let b = heroes[x as keyof typeof heroes];
-                // if (a[by as keyof Hero] === b[by as keyof Hero]) {
-                //     return order * ((a.displayName)["en"] > (b.displayName)["en"] ? 1 : -1);
-                // }
                 const first = a[by as keyof Hero] || 0;
                 const second =  b[by as keyof Hero] || 0;
                 return order * (first > second ? 1 : -1);
@@ -56,13 +54,13 @@ export default class Heroes extends React.Component {
 
     public render() {
         return <div>
-            {/* <div>
+            <div>
                 <button onClick={(e) => this.sortHeroes('draftTier')}>Order by Tier/Cost</button>
                 <button onClick={(e) => this.sortHeroes('displayName')}>Order by Name</button>
-            </div> */}
+            </div>
             <pre>{JSON.stringify( heroes['abaddon'], null, 2 )}</pre>
             <div className={commonStyles.CardsContainer}>
-                { this.state.heroes.map( (e: string, i: number) => <HeroCard heroKey={e} embedded={false}/>)}
+                { this.state.heroes.map( (e: keyof typeof heroes, i: number) => <HeroCard hero={heroes[e]} embedded={false}/>)}
             </div>
         </div>
     }
