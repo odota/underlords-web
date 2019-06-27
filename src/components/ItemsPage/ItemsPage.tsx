@@ -4,32 +4,69 @@ import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 import { underlordsLoc } from '../Localization/Localization';
 import commonStyles from '../../common.module.css';
 import ItemCard from '../ItemCard/ItemCard';
-import { Item } from '../../types';
-
+import { Item, Items } from '../../types';
+import { IconArrowUp, IconArrowDown } from '../Icons';
+import { strings } from '../Localization/Localization';
+import SortButtons from '../SortButtons/SortButtons';
 
 export default class ItemsPage extends React.Component {
     
     state = {
-        order: Object.keys(items)
+        order: Object.keys(items),
+        currentSort: 'displayName',
+        isAscending: true
     }
 
-    public componentDidMount() {
+    sorts = [
+        {
+            by: 'displayName',
+            name: "dac_heropedia_name"
+        },
+        {
+            by: 'tier',
+            name: "dac_heropedia_tiers"
+        },
+        {
+            by: 'type',
+            name: "dac_dev_item_type"
+        }
+    ];
 
+    constructor(props: any) {
+        super(props);
+        this.sort = this.sort.bind(this);
     }
 
     private sort(by: string) {
+        const ascending: boolean = this.state.currentSort === by ? !this.state.isAscending : true;
+        const order: number = ascending ? 1 : -1;
+        let newSort: string[] = this.state.order
+            .sort((x: string, y: string) => {
+                let a: Item = items[x as keyof typeof items];
+                let b: Item = items[y as keyof typeof items];
+                const first = by === "displayName" ? underlordsLoc[a.displayName]: a[by as keyof Item] || 0;
+                const second =  by === "displayName" ? underlordsLoc[b.displayName] : b[by as keyof Item] || 0;
+                if (first === second) {
+                    return underlordsLoc[a.displayName] > underlordsLoc[b.displayName] ? 1 : -1;
+                }
+                return order * (first > second ? 1 : -1);
+            });
 
+        this.setState({
+            order: newSort,
+            currentSort: by,
+            isAscending: ascending
+        });
     }
 
     public render() {
-        return <div>
+        return <div className={commonStyles.PageContainer}>
             <div className={commonStyles.PageSectionHeader}>
                 <h1>Items</h1>
-                <div className={commonStyles.SortButtonsContainer}>
-                    <h3>Sort</h3>
-                    <button onClick={(e) => this.sort('draftTier')}>Tier/Cost</button>
-                    <button onClick={(e) => this.sort('displayName')}>Name</button>
-                </div>
+                <SortButtons sorts={this.sorts} 
+                    sortFunction={this.sort}
+                    currentSort={this.state.currentSort}
+                    isAscending={this.state.isAscending}/>
             </div>
             <ErrorBoundary>
                 <div className={commonStyles.CardsContainer}>

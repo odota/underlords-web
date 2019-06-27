@@ -22,3 +22,16 @@
     width: 80%;
     vertical-align: middle;
 }
+
+.HeroesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.HeroesContainer img {
+    height: 65px;
+    width: 65px;
+    margin: 5px;
+}

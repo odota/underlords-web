@@ -1,7 +1,6 @@
 .Subtitle {
-    text-transform: uppercase;
     font-size: 14px;
-    letter-spacing: 1px;
+    width: fit-content;
 }
 
 .Midtitle {
@@ -20,16 +19,19 @@
 .CardsContainer {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .Card {
-    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
-    width: 300px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    width: calc(25% - 18px);
+    max-width: 300px;
+    min-width: 278px;
     margin: 8px;
     border-radius: 8px; 
     color: white;
     overflow: hidden;
-    border: 1px solid #4a7b35;
+    background-color: #2c3e44;
 }
 
 .CardCap {
@@ -113,4 +115,36 @@
     transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
     background-color: rgb(102, 187, 255);
     text-align: center;
+}
+
+.SortButtonsContainer button div {
+    padding: 0 10px;
+}
+
+button.ActiveButton {
+    background-color: #66BB6A;
+}
+
+.InlineImageContainer>img,
+.InlineImageContainer>svg {
+    width: 14px;
+    height: 14px;
+    margin-right: 3px;
+}
+
+.PageContainer {
+    padding: 0 10px;
+}
+
+.Tooltip {
+    opacity: 1 !important;
+}
+
+.Tooltip>div {
+    margin: 0 auto !important;
+}
+
+.HighlightStat {
+    background-color: #585802;
+    font-weight: bold;
 }

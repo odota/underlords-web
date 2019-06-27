@@ -35,9 +35,9 @@ export default class AllianceCard extends React.Component<{ alliance: Alliance }
                 </div>
             })}
           </div>
-          <div>
+          <div className={styles.HeroesContainer}>
             {alliance.heroes.map((e: Hero, i: number) => {
-              return <div className={commonStyles.ImageInRow} key={i}>
+              return <div key={i}>
                   <img data-tip data-for={`hero_${e.dota_unit_name}`} alt={e.displayName} src={GetHeroImage(e.dota_unit_name)} />
                 </div>
             })}

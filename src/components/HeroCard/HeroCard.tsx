@@ -1,17 +1,61 @@
 import React from 'react';
-import ReactTooltip from 'react-tooltip';
-import { heroes, alliances, underlordsLoc, abilitiesLoc } from '../Localization/Localization';
+import { underlordsLoc, abilitiesLoc } from '../Localization/Localization';
 import abilities from 'underlordsconstants/build/underlords_abilities.json';
 import styles from './HeroCard.module.css';
 import commonStyles from '../../common.module.css';
 import { StripHtml } from '../../utils';
-import { Hero, Heroes, GameStrings, Ability, Abilities, Alliance } from '../../types';
-import AllianceCard from '../AllianceCard/AllianceCard';
+import { Hero, Ability, Abilities } from '../../types';
 
-export default class HeroCard extends React.Component<{ hero: Hero }> {
+export default class HeroCard extends React.Component<{ hero: Hero, highlight?: string }> {
 
+    offensiveStats = [
+        {
+            stat: "damageMin",
+            name: "dac_ingame_damagemin"
+        },
+        {
+            stat: "damageMax",
+            name: "dac_ingame_damagemax"
+        },
+        {
+            stat: "attackRange",
+            name: "dac_ingame_attackrange"
+        },
+        {
+            stat: "attackRate",
+            name: "dac_ingame_attackspeed"
+        },
+        {
+            stat: "maxmana",
+            name: "dac_ingame_mana"
+        },
+        {
+            stat: "movespeed",
+            name: "dac_ingame_movespeed"
+        }
+    ]
+    
+    defensiveStats = [
+        {
+            stat: "health",
+            name: "dac_ingame_health"
+        },
+        {
+            stat: "healthRegen",
+            name: "dac_ingame_healthregen"
+        },
+        {
+            stat: "armor",
+            name: "dac_ingame_armor"
+        },
+        {
+            stat: "magicResist",
+            name: "dac_ingame_magicresist"
+        },
+        
+    ]
     public render() {
-        const { hero } = this.props;
+        const { hero, highlight } = this.props;
         const name = underlordsLoc[`${hero.displayName}`];
         if (!hero.dota_unit_name) {
             return null;
@@ -27,13 +71,16 @@ export default class HeroCard extends React.Component<{ hero: Hero }> {
                     </div>
                 </div>
                 <div className={commonStyles.CardBody}>
-                    <div className={commonStyles.Subtitle}>Armor: {hero.armor}</div>
-                    <div className={commonStyles.Subtitle}>Attack Range: {hero.attackRange}</div>
-                    <div className={commonStyles.Subtitle}>Attack Rate: {hero.attackRate}</div>
+                    
                     { /* TODO get the top HP/damage value and show bar relative to max */ }
-                    <div className={commonStyles.Subtitle}>Health: {hero.health instanceof Array ? hero.health.join( ' / ') : hero.health }</div>
-                    {hero.damageMin && <div className={commonStyles.Subtitle}>Damage Min: {hero.damageMin instanceof Array ? hero.damageMin.join(' / ') : hero.damageMin}</div>}
-                    {hero.damageMax && <div className={commonStyles.Subtitle}>Damage Max: {hero.damageMax instanceof Array ? hero.damageMax.join(' / ') : hero.damageMax}</div>}
+                    <h4 className={commonStyles.Midtitle}>Offense</h4>
+                    {
+                        this.offensiveStats.map((e, i) => <StatBlock hero={hero} stat={e} highlight={highlight} />)
+                    }
+                    <h4>Defense</h4>
+                    {
+                        this.defensiveStats.map((e, i) => <StatBlock hero={hero} stat={e} highlight={highlight} />)
+                    }
                     <div className={commonStyles.Subtitle}>Alliances:</div>
                     { hero.keywords ? 
                         hero.keywords.split(' ').map( (keyword: string, i: number) => {
@@ -58,6 +105,22 @@ export default class HeroCard extends React.Component<{ hero: Hero }> {
         </div>
     }
 }
+
+const StatBlock = ( props: { 
+    hero: Hero,
+    stat: {
+        stat: string,
+        name: string
+    },
+    highlight?: string
+}) => {
+    const {hero, stat, highlight } = props;
+
+    return <div className={`${commonStyles.Subtitle} ${highlight && highlight === stat.stat ? commonStyles.HighlightStat : ''}`}>
+        {underlordsLoc[stat.name]}: {FormatStat(hero[stat.stat])}
+    </div>
+}
+const FormatStat = (stat: number[]|string) => stat instanceof Array ? stat.join(' / ') : stat;
 
 const GetHeroImage = ( dotaName: string ) => `https://api.opendota.com/apps/dota2/images/heroes/${dotaName.replace('npc_dota_hero_', '')}_full.png?`;
 

@@ -9,5 +9,12 @@
     "app_donate": "Donate",
     "app_netlify": "Deploys by Netlify",
     "app_gravitech": "A Gravitech LLC Site",
-    "app_github": "Github"
+    "app_github": "Github",
+
+    "sort_tier": "Tier",
+    "sort_name": "Name",
+    "sort_health": "Health",
+    "sort_damage": "Damage",
+    "sort_armor": "Armor",
+    "sort_type": "Type"
 }

@@ -3,7 +3,7 @@ import { Item } from '../../types';
 import { StripHtml } from '../../utils';
 import { underlordsLoc } from '../Localization/Localization';
 import commonStyles from '../../common.module.css';
-import styles from './ItemCard.module.css';
+import { isBigIntLiteral } from '@babel/types';
 
 // https://api.opendota.com/apps/dota2/images/tooltips/gold.png
 // https://api.opendota.com/apps/dota2/images/tooltips/mana.png
@@ -13,19 +13,17 @@ export default class ItemmCard extends React.Component<{ item: Item}> {
         const { item } = this.props;
         const description = StripHtml(underlordsLoc[item.description]);
         const lore = StripHtml(underlordsLoc[`${item.displayName}_lore`]);
+        const displayName = underlordsLoc[item.displayName];
         return <div className={commonStyles.Card}>
             <div className={commonStyles.CardCapSmallImage}>
-                {/* Hide image for now if not found... */}
-                <img
-                    alt={item.icon}
-                    src={`${process.env.PUBLIC_URL}/images/items/${item.icon}_psd.png`} />
-                <h1 className={commonStyles.Title}>{underlordsLoc[item.displayName]}</h1>
+                <img alt={item.icon} src={`${process.env.PUBLIC_URL}/images/items/${item.icon}_psd.png`} />
+                <h1 className={commonStyles.Title} style={{fontSize: '18px'}}>{displayName}</h1>
             </div>
             <div className={commonStyles.CardBody}>
                 <div className={commonStyles.Subtitle}>Tier: {item.tier}</div>
                 <div className={commonStyles.Subtitle}>Type: {underlordsLoc[`dac_dev_item_${item.type}`]}</div>
                 { item.cooldown ? 
-                    <div className={styles.InlineImageContainer}>
+                    <div className={commonStyles.InlineImageContainer}>
                         <img alt="cooldown" src={"https://api.opendota.com/apps/dota2/images/tooltips/cooldown.png"}/>
                         <span>{item.cooldown}</span>
                     </div>
