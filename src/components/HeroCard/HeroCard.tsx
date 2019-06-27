@@ -8,11 +8,14 @@ import { StripHtml } from '../../utils';
 import { Hero, Heroes, GameStrings, Ability, Abilities, Alliance } from '../../types';
 import AllianceCard from '../AllianceCard/AllianceCard';
 
-export default class HeroCard extends React.Component<{ hero: Hero, embedded: boolean }> {
+export default class HeroCard extends React.Component<{ hero: Hero }> {
 
     public render() {
-        const { hero, embedded } = this.props;
+        const { hero } = this.props;
         const name = underlordsLoc[`${hero.displayName}`];
+        if (!hero.dota_unit_name) {
+            return null;
+        }
         return <div className={commonStyles.Card}>
                 <div className={commonStyles.CardCap}>
                     <img className={styles.HeroImage} alt={name} src={GetHeroImage(hero.dota_unit_name)} />
@@ -37,17 +40,11 @@ export default class HeroCard extends React.Component<{ hero: Hero, embedded: bo
                             return <div className={commonStyles.ImageInRow} key={i}>
                                 <img
                                     data-tip
-                                    data-for={`alliance_${hero.dota_unit_name}${keyword}`}
+                                    data-for={`alliance_${keyword}`}
                                     className={styles.AllianceIcon}
                                     alt={keyword}
                                     src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.jpg`}
                                 />
-                                {/* {   embedded ?
-                                    <div />
-                                    : <ReactTooltip id={`alliance_${hero.dota_unit_name}${keyword}`} effect="solid" place="bottom">
-                                        <AllianceCard alliance={alliances[keyword as keyof typeof alliances]} embedded={true} />
-                                    </ReactTooltip>
-                                } */}
                             </div>;
                         }) 
                         : null}

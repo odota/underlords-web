@@ -7,9 +7,9 @@ import { Hero, Alliance, GameStrings } from '../../types';
 import HeroCard from '../HeroCard/HeroCard';
 import { GetHeroImage } from '../../utils';
 
-export default class AllianceCard extends React.Component<{ alliance: Alliance, embedded: boolean }> {
+export default class AllianceCard extends React.Component<{ alliance: Alliance }> {
   render() {
-    const { alliance, embedded } = this.props;
+    const { alliance } = this.props;
     if (!alliance || !alliance.levels || !alliance.heroes || alliance.heroes.length < 1) {
       return null;
     }
@@ -38,14 +38,7 @@ export default class AllianceCard extends React.Component<{ alliance: Alliance, 
           <div>
             {alliance.heroes.map((e: Hero, i: number) => {
               return <div className={commonStyles.ImageInRow} key={i}>
-                  <img data-tip data-for={`hero${e.dota_unit_name}`} alt={e.displayName} src={GetHeroImage(e.dota_unit_name)} />
-                  {
-                    embedded ?
-                    <div/>
-                    : <ReactTooltip id={`hero${e.dota_unit_name}`} effect="solid" place="bottom">
-                      <HeroCard hero={e} embedded={true}/>
-                    </ReactTooltip>
-                  }
+                  <img data-tip data-for={`hero_${e.dota_unit_name}`} alt={e.displayName} src={GetHeroImage(e.dota_unit_name)} />
                 </div>
             })}
           </div>
