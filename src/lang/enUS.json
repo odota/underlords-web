@@ -1,3 +1,13 @@
 {
-    "General_OpenUnderlords": "OpenUnderlords"
+    "General_OpenUnderlords": "OpenUnderlords",
+    "app_description": "Open source Dota Underlords data platform",
+    "app_powered_by": "Powered by",
+    "app_opendota": "Sister Site to OpenDota",
+    "app_privacy_terms": "Privacy & Terms",
+    "app_blog": "Blog",
+    "app_translate": "Translate",
+    "app_donate": "Donate",
+    "app_netlify": "Deploys by Netlify",
+    "app_gravitech": "A Gravitech LLC Site",
+    "app_github": "Github"
 }

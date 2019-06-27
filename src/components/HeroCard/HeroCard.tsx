@@ -71,7 +71,7 @@ const AbilityCard = ( props: { abilityKey: string} ) => {
     const name = abilitiesLoc[`dac_ability_${abilityKey}`];
     const description = StripHtml(abilitiesLoc[`dac_ability_${abilityKey}_description`]);
     const lore = StripHtml(abilitiesLoc[`dac_ability_${abilityKey}_lore`]);
-    return <div className={styles.AbilityCard}>
+    return <div className={commonStyles.DescriptionCard}>
         <div style={{ display: 'flex' }} className={styles.Subtitle}>
             <div className={styles.AbilityImage}>
                 <img alt={name} src={`https://api.opendota.com/apps/dota2/images/abilities/${ability.iconName}_md.png`} />

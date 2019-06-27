@@ -13,5 +13,7 @@ type GameStrings = { [key: string]: string };
 type AbilityStrings = { [key: string]: string };
 type Alliance = typeof alliances.beast;
 type Alliances = { [key: string]: Alliance };
-type Item = typeof items[keyof typeof items];
+type Item = typeof items[keyof typeof items] & {
+    cooldown?: number
+};
 type Items = { [key: string]: Item };
