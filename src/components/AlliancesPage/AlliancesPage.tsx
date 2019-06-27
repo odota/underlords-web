@@ -15,8 +15,8 @@ export default class AlliancesPage extends React.Component {
 
   render() {
     return <div className={commonStyles.CardsContainer}>
-      {this.state.order.map((key: string, i: number) => 
-      <AllianceCard alliance={alliances[key]} key={i} />)}
+      {this.state.order.map((key: string, i: number) =>{
+      return <AllianceCard alliance={alliances[key]} embedded={false} key={i} />})}
     </div>;
   }
 }

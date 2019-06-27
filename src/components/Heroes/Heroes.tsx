@@ -1,7 +1,7 @@
 import React from 'react';
 import heroes from 'underlordsconstants/build/underlords_heroes.json';
 import commonStyles from '../../common.module.css';
-import { Hero, GameStrings } from '../../types';
+import { Hero } from '../../types';
 import HeroCard from '../HeroCard/HeroCard';
 
 export default class Heroes extends React.Component {
@@ -33,15 +33,15 @@ export default class Heroes extends React.Component {
         })
     }
 
-    private sortHeroes(by: any) {
+    private sortHeroes(by: keyof Hero) {
         const ascending: boolean = this.state.sort === by ? !this.state.isAscending : true;
         const order: number = ascending ? 1 : -1;
         let newSort: string[] = this.state.heroes
             .sort((x: string, y: string) => {
-                let a = heroes[x as keyof typeof heroes];
-                let b = heroes[x as keyof typeof heroes];
-                const first = a[by as keyof Hero] || 0;
-                const second =  b[by as keyof Hero] || 0;
+                let a: Hero = heroes[x as keyof typeof heroes];
+                let b: Hero = heroes[y as keyof typeof heroes];
+                const first = a[by] || 0;
+                const second =  b[by] || 0;
                 return order * (first > second ? 1 : -1);
             });
 
@@ -58,7 +58,6 @@ export default class Heroes extends React.Component {
                 <button onClick={(e) => this.sortHeroes('draftTier')}>Order by Tier/Cost</button>
                 <button onClick={(e) => this.sortHeroes('displayName')}>Order by Name</button>
             </div>
-            <pre>{JSON.stringify( heroes['abaddon'], null, 2 )}</pre>
             <div className={commonStyles.CardsContainer}>
                 { this.state.heroes.map( (e: keyof typeof heroes, i: number) => <HeroCard hero={heroes[e]} embedded={false}/>)}
             </div>

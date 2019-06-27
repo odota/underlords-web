@@ -5,7 +5,7 @@ import items from 'underlordsconstants/build/underlords_items.json';
 
 // TODO: Is there a better way to define this?
 // howardc: Not sure why the typing fails if we use keyof typeof heroes, maybe too many different unions confuses TS?
-type Hero = typeof heroes[keyof typeof heroes];
+type Hero = heroes.abaddon;
 type Heroes = { [key: string]: Hero };
 type Ability = typeof abilities[keyof typeof abilities];
 type Abilities = { [key: string]: Ability };

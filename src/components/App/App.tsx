@@ -11,12 +11,19 @@ import { InitLocalization } from '../Localization/Localization';
 
 export default class App extends React.Component {
 
+  state = {
+    initializing: true
+  }
+
   public async componentDidMount() {
     await InitLocalization();
+    this.setState({initializing: false});
   }
 
   public render() {
-    return <div>
+    return this.state.initializing ?
+      <div/>
+      : <div>
         <div style={{ display: 'flex' }}>
           <Link to="/alliances">Alliances</Link>
           <Link to="/heroes">Heroes</Link>
