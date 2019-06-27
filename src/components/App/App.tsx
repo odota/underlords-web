@@ -3,10 +3,15 @@ import { Switch, Route, Link } from 'react-router-dom';
 import AlliancesPage from '../AlliancesPage/AlliancesPage';
 import HeroesPage from '../HeroesPage/HeroesPage';
 import ItemsPage from '../ItemsPage/ItemsPage';
-import { InitLocalization } from '../Localization/Localization';
+import { InitLocalization, heroes, alliances } from '../Localization/Localization';
 import Header from '../Header';
 import Footer from '../Footer';
 import styles from './App.module.css';
+import { Hero, Alliance } from '../../types';
+import HeroCard from '../HeroCard/HeroCard';
+import ReactTooltip from 'react-tooltip';
+import commonStyles from '../../common.module.css';
+import AllianceCard from '../AllianceCard/AllianceCard';
 
 export default class App extends React.Component {
 
@@ -37,6 +42,14 @@ export default class App extends React.Component {
             <Route path="/items" component={ItemsPage} />
           </Switch>
         </div>
+        <ReactTooltip id="hero" place="right" className={commonStyles.Tooltip} effect="solid" getContent={ (dataTip) => {
+          const hero: Hero = heroes[dataTip as keyof typeof heroes];
+          return hero ? <HeroCard hero={hero} /> : null;
+        }} />
+        <ReactTooltip id="alliance" place="right" className={commonStyles.Tooltip} effect="solid" getContent={ (dataTip) => {
+          const alliance: Alliance = alliances[dataTip as keyof typeof alliances];
+          return alliance ? <AllianceCard alliance={alliance} /> : null;
+        }} />
         <Footer/>
       </div>;
   }

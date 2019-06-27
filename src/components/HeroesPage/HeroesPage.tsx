@@ -1,12 +1,10 @@
 import React from 'react';
 import heroes from 'underlordsconstants/build/underlords_heroes.json';
 import commonStyles from '../../common.module.css';
-import { Hero, Alliance } from '../../types';
+import { Hero } from '../../types';
 import HeroCard from '../HeroCard/HeroCard';
-import { alliances } from '../Localization/Localization';
-import AllianceCard from '../AllianceCard/AllianceCard';
 import ReactTooltip from 'react-tooltip';
-import { strings, underlordsLoc } from '../Localization/Localization';
+import { underlordsLoc } from '../Localization/Localization';
 import SortButtons from '../SortButtons/SortButtons';
 
 export default class HeroesPage extends React.Component {
@@ -99,6 +97,8 @@ export default class HeroesPage extends React.Component {
             heroes: newSort,
             currentSort: by,
             isAscending: ascending
+        }, () => {
+            ReactTooltip.rebuild();
         });
     }
 
@@ -111,14 +111,6 @@ export default class HeroesPage extends React.Component {
                     currentSort={this.state.currentSort}
                     isAscending={this.state.isAscending}/>
             </div>
-            {
-                Object.keys(alliances).map((e, i) => {
-                    const alliance: Alliance = alliances[e as keyof typeof alliances];
-                    return <ReactTooltip id={`alliance_${alliance.key}`} className={commonStyles.Tooltip}>
-                        <AllianceCard alliance={alliance} />
-                    </ReactTooltip>
-                })
-            }
             <div className={commonStyles.CardsContainer}>
                 { this.state.heroes.map( (e: keyof typeof heroes, i: number) => <HeroCard hero={heroes[e]} highlight={this.state.currentSort} />)}
                 {ReactTooltip.rebuild() /*rebinds the tooltips so that they actually work*/}

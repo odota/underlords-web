@@ -5,8 +5,6 @@ import { underlordsLoc } from '../Localization/Localization';
 import commonStyles from '../../common.module.css';
 import ItemCard from '../ItemCard/ItemCard';
 import { Item, Items } from '../../types';
-import { IconArrowUp, IconArrowDown } from '../Icons';
-import { strings } from '../Localization/Localization';
 import SortButtons from '../SortButtons/SortButtons';
 
 export default class ItemsPage extends React.Component {

@@ -2,9 +2,7 @@ import React from 'react';
 import styles from './AllianceCard.module.css';
 import commonStyles from '../../common.module.css';
 import { underlordsLoc, abilitiesLoc } from '../Localization/Localization';
-import ReactTooltip from 'react-tooltip';
 import { Hero, Alliance, GameStrings } from '../../types';
-import HeroCard from '../HeroCard/HeroCard';
 import { GetHeroImage } from '../../utils';
 
 export default class AllianceCard extends React.Component<{ alliance: Alliance }> {
@@ -38,7 +36,7 @@ export default class AllianceCard extends React.Component<{ alliance: Alliance }
           <div className={styles.HeroesContainer}>
             {alliance.heroes.map((e: Hero, i: number) => {
               return <div key={i}>
-                  <img data-tip data-for={`hero_${e.dota_unit_name}`} alt={e.displayName} src={GetHeroImage(e.dota_unit_name)} />
+                  <img data-tip={e.key} data-for="hero" alt={e.displayName} src={GetHeroImage(e.dota_unit_name)} />
                 </div>
             })}
           </div>

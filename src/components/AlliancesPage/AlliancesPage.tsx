@@ -1,9 +1,8 @@
 import React from 'react';
 import commonStyles from '../../common.module.css';
 import AllianceCard from '../AllianceCard/AllianceCard';
-import HeroCard from '../HeroCard/HeroCard';
-import { alliances, heroes, underlordsLoc } from '../Localization/Localization';
-import { Hero, Alliance } from '../../types';
+import { alliances, underlordsLoc } from '../Localization/Localization';
+import { Alliance } from '../../types';
 import ReactTooltip from 'react-tooltip';
 import SortButtons from '../SortButtons/SortButtons';
 
@@ -83,17 +82,8 @@ export default class AlliancesPage extends React.Component {
                 isAscending={this.state.isAscending}/>
         </div>
         <div className={commonStyles.CardsContainer}>
-        {
-          Object.keys(heroes).map((e, i) => {
-              const hero: Hero = heroes[e as keyof typeof heroes];
-              return <ReactTooltip id={`hero_${hero.dota_unit_name}`} className={commonStyles.Tooltip} effect="solid">
-                  <HeroCard hero={hero} />
-              </ReactTooltip>
-          })
-        }
-        {this.state.order.map((key: string, i: number) =>{
-        return <AllianceCard alliance={alliances[key]} key={i} />})}
-        {/* {ReactTooltip.rebuild() /*rebinds the tooltips so that they actually work*/} */}
+          {this.state.order.map((key: string, i: number) =>{
+          return <AllianceCard alliance={alliances[key]} key={i} />})}
       </div>
     </div>
   }

@@ -86,8 +86,8 @@ export default class HeroCard extends React.Component<{ hero: Hero, highlight?: 
                         hero.keywords.split(' ').map( (keyword: string, i: number) => {
                             return <div className={commonStyles.ImageInRow} key={i}>
                                 <img
-                                    data-tip
-                                    data-for={`alliance_${keyword}`}
+                                    data-tip={keyword}
+                                    data-for="alliance"
                                     className={styles.AllianceIcon}
                                     alt={keyword}
                                     src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.jpg`}
