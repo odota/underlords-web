@@ -18,13 +18,8 @@ export default class ItemmCard extends React.Component<{ item: Item}> {
                 {/* Hide image for now if not found... */}
                 <img
                     alt={item.icon}
-                    src={`https://api.opendota.com/apps/dota2/images/items/${item.icon}_lg.png`} 
-                    onError={(e)=> {
-                        console.log("error!")
-                        // @ts-ignore
-                        e.target.style.display = "none";
-                    }}/>
-                <div className={commonStyles.Title}>{underlordsLoc[item.displayName]}</div>
+                    src={`${process.env.PUBLIC_URL}/images/items/${item.icon}_psd.png`} />
+                <h1 className={commonStyles.Title}>{underlordsLoc[item.displayName]}</h1>
             </div>
             <div className={commonStyles.CardBody}>
                 <div className={commonStyles.Subtitle}>Tier: {item.tier}</div>

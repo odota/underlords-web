@@ -42,12 +42,12 @@ export default class HeroCard extends React.Component<{ hero: Hero, embedded: bo
                                     alt={keyword}
                                     src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.jpg`}
                                 />
-                                {   embedded ?
+                                {/* {   embedded ?
                                     <div />
                                     : <ReactTooltip id={`alliance_${hero.dota_unit_name}${keyword}`} effect="solid" place="bottom">
                                         <AllianceCard alliance={alliances[keyword as keyof typeof alliances]} embedded={true} />
                                     </ReactTooltip>
-                                }
+                                } */}
                             </div>;
                         }) 
                         : null}

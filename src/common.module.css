@@ -47,15 +47,16 @@
 }
 
 .CardCapSmallImage>img {
-    height: 24px;
-    width: 24px;
-    padding-right: 20px;
+    height: 50px;
+    width: 50px;
+    padding-right: 10px;
     vertical-align: middle;
 }
 
-.CardCapSmallImage>div {
+.CardCapSmallImage>h1 {
     display: inline-block;
     vertical-align: middle;
+    width: calc((100%) - (80px));
 }
 
 .CardCapContent {
@@ -76,8 +77,13 @@
 }
 
 .ImageInRow {
-    margin: 5px;
+    margin: 3px 3px 0 0;
     display: inline-block;
+}
+
+.ImageInRow>img {
+    height: 60px;
+    width: 60px;
 }
 
 .DescriptionCard {
