@@ -118,7 +118,7 @@ export default class HeroesPage extends React.Component {
                     isAscending={this.state.isAscending}/>
             </div>
             <div className={commonStyles.CardsContainer}>
-                { this.state.heroes.map( (e: keyof typeof heroes, i: number) => <HeroCard hero={heroes[e]} highlight={this.state.currentSort} />)}
+                { this.state.heroes.map( (e: keyof typeof heroes, i: number) => <HeroCard key={e} hero={heroes[e]} highlight={this.state.currentSort} />)}
                 {ReactTooltip.rebuild() /*rebinds the tooltips so that they actually work*/}
             </div>
         </div>

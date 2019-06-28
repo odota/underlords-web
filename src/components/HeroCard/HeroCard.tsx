@@ -66,7 +66,7 @@ export default class HeroCard extends React.Component<{ hero: Hero, highlight?: 
                     <div className={commonStyles.CardCapContent}>
                         <div className={commonStyles.CardCapContentContainer}>
                             <div className={commonStyles.Title}>{name}</div>
-                            <div className={commonStyles.Midtitle}>Tier/Cost {hero.draftTier}</div>
+                            <div className={commonStyles.Midtitle}>Tier {hero.draftTier}</div>
                         </div>
                     </div>
                 </div>
@@ -139,6 +139,6 @@ const AbilityCard = ( props: { abilityKey: string} ) => {
             <h3>{name}</h3>
         </div>
         <p>{description}</p>
-        <small>{lore}</small>
+        <small className={commonStyles.LoreText}>{lore}</small>
     </div>;
 }

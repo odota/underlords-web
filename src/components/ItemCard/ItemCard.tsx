@@ -19,7 +19,7 @@ export default class ItemmCard extends React.Component<{ item: Item}> {
                 <h1 className={commonStyles.Title} style={{fontSize: '18px'}}>{displayName}</h1>
             </div>
             <div className={commonStyles.CardBody}>
-                <div className={commonStyles.Subtitle}>Tier: {item.tier}</div>
+                <div className={commonStyles.Midtitle}>Tier {item.tier}</div>
                 <div className={commonStyles.Subtitle}>Type: {underlordsLoc[`dac_dev_item_${item.type}`]}</div>
                 { item.cooldown ? 
                     <div className={commonStyles.InlineImageContainer}>
@@ -30,7 +30,7 @@ export default class ItemmCard extends React.Component<{ item: Item}> {
                 }
                 <div className={commonStyles.DescriptionCard}>
                     <p>{description}</p>
-                    <small>{lore}</small>
+                    <small className={commonStyles.LoreText}>{lore}</small>
                 </div>
             </div>
         </div>

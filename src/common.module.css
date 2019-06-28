@@ -10,6 +10,12 @@
     letter-spacing: 1px;
 }
 
+.LoreText {
+    text-transform: uppercase;
+    color: gray;
+    font-size: 11px;
+}
+
 .Blue {
     color: #5d5dff;
 }
@@ -140,11 +146,21 @@ button.ActiveButton {
     padding: 0 10px;
 }
 
-.Tooltip {
-    opacity: 1 !important;
+.PageSectionHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.Tooltip>div {
+/* Include [data-id="tooltip"] to increase the specificity of selectors so these override defaults */
+[data-id="tooltip"].Tooltip {
+    opacity: 1 !important;
+    background-color: transparent !important;
+    zoom: 0.8;
+}
+
+[data-id="tooltip"].Tooltip>div {
     margin: 0 auto !important;
 }
 

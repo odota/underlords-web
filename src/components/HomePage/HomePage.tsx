@@ -78,7 +78,7 @@ const Collage = ( props: {urls: { alt: string, url: string}[]}) => {
                     top: Math.random() * 125
                 };
                 
-                return <img alt={url.alt} src={url.url} style={style}/>
+                return <img key={url.url} alt={url.alt} src={url.url} style={style}/>
             })
         }
     </div>
