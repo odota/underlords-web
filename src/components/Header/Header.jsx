@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
+import IconLanguage from 'material-ui/svg-icons/action/language';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import Bug from 'material-ui/svg-icons/action/bug-report';
 import styled from 'styled-components';
@@ -11,8 +11,8 @@ import AppLogo from '../App/AppLogo';
 import BurgerMenu from './BurgerMenu';
 import LocalizationMenu from '../LocalizationMenu/LocalizationMenu';
 import { MediaQuery } from 'react-responsive';
-
-const REPORT_BUG_PATH = `//github.com/odota/underlords-ui/issues`;
+import { GITHUB_ISSUES_LINK } from '../../utils';
+import { strings } from '../Localization/Localization';
 
 const VerticalAlignToolbar = styled(ToolbarGroup)`
   display: flex;
@@ -85,8 +85,22 @@ class Header extends React.Component {
       navbarPages
     } = this.props;
 
+    const ReportBug = () => (
+      <BugLink
+        href={GITHUB_ISSUES_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Bug />
+        <span>
+          { strings.app_report_bug }
+        </span>
+      </BugLink>
+    );
+
     const burgerItems = [
       ...navbarPages,
+      <ReportBug/>
     ];
 
     const buttonProps = {
@@ -120,42 +134,16 @@ class Header extends React.Component {
 
     const SettingsGroup = ({ user }) => (
       <VerticalAlignDropdown
-        Button={IconButton}
+        Button={IconLanguage}
         buttonProps={buttonProps}
       >
         <LocalizationMenu />
-        <ReportBug />
       </VerticalAlignDropdown>
     );
 
     SettingsGroup.propTypes = {
       user: PropTypes.shape({}),
     };
-
-    const ReportBug = () => (
-      <BugLink
-        href={REPORT_BUG_PATH}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Bug />
-        <span>
-          Bug!?
-        </span>
-      </BugLink>
-    );
-
-    // const LogOut = () => (
-    //   <BugLink
-    //     href={`${process.env.REACT_APP_API_HOST}/logout`}
-    //     rel="noopener noreferrer"
-    //   >
-    //     <LogOutButton />
-    //     <span>
-    //       {strings.app_logout}
-    //     </span>
-    //   </BugLink>
-    // );
 
     return (
       <div>
@@ -164,7 +152,10 @@ class Header extends React.Component {
             <LogoGroup/>
             <LinkGroup />
           </VerticalAlignDiv>
-          <VerticalAlignDiv style={{ marginLeft: 'auto' }}>
+          <VerticalAlignDiv style={{ marginLeft: 'auto', marginRight: '5px' }}>
+            <MediaQuery minDeviceWidth={768}>
+              <ReportBug />
+            </MediaQuery>
             <SettingsGroup/>
           </VerticalAlignDiv>
         </ToolbarHeader>
