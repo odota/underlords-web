@@ -9,6 +9,7 @@ import Dropdown from '../Header/Dropdown';
 import constants from '../constants';
 import AppLogo from '../App/AppLogo';
 import BurgerMenu from './BurgerMenu';
+import LocalizationMenu from '../LocalizationMenu/LocalizationMenu';
 import { MediaQuery } from 'react-responsive';
 
 const REPORT_BUG_PATH = `//github.com/odota/underlords-ui/issues`;
@@ -95,7 +96,7 @@ class Header extends React.Component {
     const LogoGroup = ({ small }) => (
       <VerticalAlignToolbar>
         {!small && <BurgerMenu menuItems={burgerItems} />}
-        <AppLogo style={{ marginRight: 18 }} />
+        <AppLogo url={this.props.url} style={{ marginRight: 18 }} />
       </VerticalAlignToolbar>
     );
 
@@ -122,8 +123,8 @@ class Header extends React.Component {
         Button={IconButton}
         buttonProps={buttonProps}
       >
+        <LocalizationMenu />
         <ReportBug />
-        {/* {user ? <LogOut /> : null} */}
       </VerticalAlignDropdown>
     );
 
@@ -164,6 +165,7 @@ class Header extends React.Component {
             <LinkGroup />
           </VerticalAlignDiv>
           <VerticalAlignDiv style={{ marginLeft: 'auto' }}>
+            <SettingsGroup/>
           </VerticalAlignDiv>
         </ToolbarHeader>
       </div>

@@ -1,11 +1,13 @@
 import React from 'react';
 import { strings, underlordsLoc, heroes, alliances } from '../Localization/Localization';
 import styles from './HomePage.module.css';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import items from 'underlordsconstants/build/underlords_items.json';
 import { GetHeroImage } from '../../utils';
+// @ts-ignore
+import path from 'path-browserify';
 
-export default class HomePage extends React.Component {
+export default class HomePage extends React.Component<RouteComponentProps> {
     state = {
         items: [],
         alliances: [],
@@ -34,7 +36,7 @@ export default class HomePage extends React.Component {
                     <a href="//opendota.com">Part of the OpenDota project</a>
                 </section>
                 <section className={styles.Links}>
-                    <Link to="/alliances">
+                    <Link to={path.join(this.props.match.url, 'alliances')}>
                         <Collage urls={this.state.alliances.map((e) => {
                             return {
                                 alt: e,
@@ -43,7 +45,7 @@ export default class HomePage extends React.Component {
                         })}/>
                         <h4>{underlordsLoc["dac_ingame_tab_synergies"]}</h4>
                     </Link>
-                    <Link to="/heroes">
+                    <Link to={path.join(this.props.match.url, 'heroes')}>
                         <Collage urls={this.state.heroes.map((e) => {
                             const hero = heroes[e as keyof typeof heroes];
                             return {
@@ -53,7 +55,7 @@ export default class HomePage extends React.Component {
                         })}/>
                         <h4>{underlordsLoc["dac_ingame_tab_heroes"]}</h4>
                     </Link>
-                    <Link to="/items">
+                    <Link to={path.join(this.props.match.url, 'items')}>
                         <Collage urls={this.state.items.map((e) => {
                             const item = items[e as keyof typeof items];
                             return {
