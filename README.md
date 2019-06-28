@@ -2,7 +2,7 @@
 
 OpenUnderlords Web UI: A web interface for viewing Dota Underlords data.
 
-Similar to OpenDota, we plan to add user stats when Valve beings to support this.
+Similar to OpenDota, we plan to add user stats when Valve begins to support this.
 
 ## Dev
 
