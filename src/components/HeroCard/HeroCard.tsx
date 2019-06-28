@@ -66,7 +66,11 @@ export default class HeroCard extends React.Component<{ hero: Hero, highlight?: 
                     <div className={commonStyles.CardCapContent}>
                         <div className={commonStyles.CardCapContentContainer}>
                             <div className={commonStyles.Title}>{name}</div>
-                            <div className={commonStyles.Midtitle}>Tier {hero.draftTier}</div>
+                            <div className={commonStyles.Midtitle}>
+                                {underlordsLoc["dac_hero_unit_cost"] ?
+                                    underlordsLoc["dac_hero_unit_cost"].replace("{i:UnitCost}", hero.draftTier)
+                                    : `Tier ${hero.draftTier}`}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,11 +91,11 @@ export default class HeroCard extends React.Component<{ hero: Hero, highlight?: 
                         : null }
                     </div>
                     { /* TODO get the top HP/damage value and show bar relative to max */ }
-                    <h4 className={commonStyles.Midtitle}>Offense</h4>
+                    <h4 className={commonStyles.Midtitle}>{underlordsLoc["dac_dev_item_offensive"]}</h4>
                     {
                         this.offensiveStats.map((e, i) => <StatBlock key={i} hero={hero} stat={e} highlight={highlight} />)
                     }
-                    <h4 className={`${commonStyles.Midtitle} ${commonStyles.Blue}`}>Defense</h4>
+                    <h4 className={`${commonStyles.Midtitle} ${commonStyles.Blue}`}>{underlordsLoc["dac_dev_item_defensive"]}</h4>
                     {
                         this.defensiveStats.map((e, i) => <StatBlock key={i} hero={hero} stat={e} highlight={highlight} />)
                     }
