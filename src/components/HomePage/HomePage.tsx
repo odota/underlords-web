@@ -15,11 +15,11 @@ export default class HomePage extends React.Component {
 
     public componentDidMount() {
         this.setState({
-            items: Object.keys(items).sort(() => 0.5 - Math.random()).slice(0, 10),
+            items: Object.keys(items).sort(() => 0.5 - Math.random()).slice(0, 12),
             heroes: Object.keys(heroes).filter((e) => heroes[e].draftTier > 0)
-                        .sort(() => 0.5 - Math.random()).slice(0, 10),
+                        .sort(() => 0.5 - Math.random()).slice(0, 12),
             alliances: Object.keys(alliances).filter((e) => alliances[e].heroes && alliances[e].heroes.length > 0)
-                        .sort(() => 0.5 - Math.random()).slice(0, 10)
+                        .sort(() => 0.5 - Math.random()).slice(0, 12)
         });
     }
 

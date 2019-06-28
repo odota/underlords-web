@@ -9,6 +9,15 @@ import * as serviceWorker from './serviceWorker';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import { createBrowserHistory } from 'history';
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-55757642-4');
+ReactGA.pageview(window.location.pathname + window.location.search);
+const history = createBrowserHistory();
+history.listen((location) => {
+  ReactGA.pageview(location.pathname);
+});
 
 ReactDOM.render(
     // @ts-ignore
