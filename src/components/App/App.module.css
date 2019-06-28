@@ -1,3 +1,11 @@
+.AppContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100vh;
+}
+
 .MainContainer {
     max-width: 1200px;
+    margin: 0 auto;
 }

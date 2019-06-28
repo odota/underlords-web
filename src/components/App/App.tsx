@@ -59,36 +59,33 @@ export default class App extends React.Component<RouteComponentProps> {
   public render() {
     return this.state.initializing ?
       <div/>
-      : <div>
+      : <div className={styles.AppContainer}>
         <Helmet>
             <meta charSet="utf-8" />
             <title>{strings.app_name} | {strings.app_title}</title>
             <meta name="description" content={strings.app_description} />
             <meta property="og:description" content={strings.app_description}></meta>
             {
-              // Object.values(SUPPORTED_LANGUAGES).map((lang) => {
-              //   console.log(this.props.match.url)
-              //   console.log(process.env.PUBLIC_URL);
-              //   console.log(this.props.match.url.replace(/[^\\\/]*/, lang));
-              //   // @ts-ignore
-              //   return <link
-              //     rel="alternate"
-              //     hreflang={lang}
-              //     href={path.join(process.env.PUBLIC_URL, this.props.match.url.replace(/[^\\\/]*/, lang))}/>
-              // })
+              Object.values(SUPPORTED_LANGUAGES).map((lang) => {
+                // @ts-ignore
+                return <link
+                  rel="alternate"
+                  hreflang={lang}
+                  href={(new URL(window.location.pathname.replace(/[^\/][^\/]*/, lang), window.location.href)).href}/>
+              })
             }
         </Helmet>
         <Header {...this.props.match} navbarPages={this.navbarPages.map((e: {to: string, name: string}, i: number) => {
           return <Link key={i} to={e.to}>{e.name.startsWith("dac") ? underlordsLoc[e.name] : e.name}</Link>
         })} />
-        <div className={styles.MainContainer}>
           <Switch>
             <Route exact path={`${this.props.match.path}/`} component={HomePage}/>
-            <Route path={`${this.props.match.path}/alliances`} component={AlliancesPage}/>
-            <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
-            <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
+            <div className={styles.MainContainer}>
+              <Route path={`${this.props.match.path}/alliances`} component={AlliancesPage}/>
+              <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
+              <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
+            </div>
           </Switch>
-        </div>
         <ReactTooltip id="hero" place="right" className={commonStyles.Tooltip} effect="solid" getContent={ (dataTip) => {
           const hero: Hero = heroes[dataTip as keyof typeof heroes];
           return hero ? <HeroCard hero={hero} /> : null;

@@ -9,6 +9,7 @@
     width: 100vw;
     background-size: cover;
     background-image: url('./flattened-bg_jpg.png');
+    flex: 1 0 auto;
 }
 
 .LeadTitle {
@@ -29,6 +30,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 10px;
+}
+
+.Links>a {
+    background-color: rgb(0, 0, 0, .5);
+    margin: 5px;
 }
 
 .CollageContainer {
