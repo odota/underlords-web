@@ -154,20 +154,6 @@ const Footer = () => (
         <div className="logoNsocial">
           <AppLogo />
           <SocialLinks/>
-          <div className="mobile">
-            <a
-              href="https://play.google.com/store/apps/details?id=com.opendota.mobile&hl=en"
-              style={{ position: 'relative', left: '13px', top: '12px' }}
-            >
-              <img src="/assets/images/google_play_store.png" alt="" height="46px" />
-            </a>
-            <a
-              href="https://itunes.apple.com/us/app/opendota/id1354762555?ls=1&mt=8"
-              style={{ position: 'relative', left: '20px', top: '5px' }}
-            >
-              <img src="/assets/images/apple_app_store.png" alt="" height="31px" />
-            </a>
-          </div>
         </div>
         <small className="about">
           { strings.app_description }

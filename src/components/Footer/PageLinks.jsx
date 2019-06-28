@@ -8,9 +8,6 @@ const PageLinks = () => {
     name: strings.app_privacy_terms,
     path: '//blog.opendota.com/2014/08/01/faq/#what-is-your-privacy-policy',
   }, {
-    name: strings.app_api_docs,
-    path: '//docs.opendota.com',
-  }, {
     name: strings.app_blog,
     path: '//odota.github.io/blog',
   }, {

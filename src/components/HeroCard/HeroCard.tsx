@@ -71,18 +71,8 @@ export default class HeroCard extends React.Component<{ hero: Hero, highlight?: 
                     </div>
                 </div>
                 <div className={commonStyles.CardBody}>
-                    
-                    { /* TODO get the top HP/damage value and show bar relative to max */ }
-                    <h4 className={commonStyles.Midtitle}>Offense</h4>
-                    {
-                        this.offensiveStats.map((e, i) => <StatBlock key={i} hero={hero} stat={e} highlight={highlight} />)
-                    }
-                    <h4>Defense</h4>
-                    {
-                        this.defensiveStats.map((e, i) => <StatBlock key={i} hero={hero} stat={e} highlight={highlight} />)
-                    }
-                    <div className={commonStyles.Subtitle}>Alliances:</div>
-                    { hero.keywords ? 
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        { hero.keywords ? 
                         hero.keywords.split(' ').map( (keyword: string, i: number) => {
                             return <div className={commonStyles.ImageInRow} key={i}>
                                 <img
@@ -94,7 +84,17 @@ export default class HeroCard extends React.Component<{ hero: Hero, highlight?: 
                                 />
                             </div>;
                         }) 
-                        : null}
+                        : null }
+                    </div>
+                    { /* TODO get the top HP/damage value and show bar relative to max */ }
+                    <h4 className={commonStyles.Midtitle}>Offense</h4>
+                    {
+                        this.offensiveStats.map((e, i) => <StatBlock key={i} hero={hero} stat={e} highlight={highlight} />)
+                    }
+                    <h4 className={`${commonStyles.Midtitle} ${commonStyles.Blue}`}>Defense</h4>
+                    {
+                        this.defensiveStats.map((e, i) => <StatBlock key={i} hero={hero} stat={e} highlight={highlight} />)
+                    }
                     {/* reverse abilities because multiple descriptions are merged into the main ability, 
                         so we show the 2nd one without a description first. */}
                     { hero.abilities ? 

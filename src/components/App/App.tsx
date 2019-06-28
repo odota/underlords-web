@@ -18,6 +18,10 @@ import { SUPPORTED_LANGUAGES } from '../../utils';
 // @ts-ignore
 import path from 'path-browserify';
 
+type MatchParams = {
+  [lang: string]: string
+}
+
 export default class App extends React.Component<RouteComponentProps> {
 
   state = {
@@ -41,7 +45,14 @@ export default class App extends React.Component<RouteComponentProps> {
   ];
 
   public async componentDidMount() {
-    await InitLocalization(this.props.match);
+    let lang = 'en';
+    if ( this.props.match && this.props.match.params ) {
+      const params = this.props.match.params as MatchParams;
+      if (params && params.lang) {
+          lang = params.lang;
+      }
+    }
+    await InitLocalization(lang);
     this.setState({initializing: false});
   }
 
@@ -76,7 +87,6 @@ export default class App extends React.Component<RouteComponentProps> {
             <Route path={`${this.props.match.path}/alliances`} component={AlliancesPage}/>
             <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
             <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
-            <Redirect to={this.props.match.path} />
           </Switch>
         </div>
         <ReactTooltip id="hero" place="right" className={commonStyles.Tooltip} effect="solid" getContent={ (dataTip) => {

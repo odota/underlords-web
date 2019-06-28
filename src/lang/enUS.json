@@ -3,7 +3,7 @@
     "app_title": "Dota Underlords stats, guides, and tips",
     "app_description": "Open source Dota Underlords data platform",
     "app_powered_by": "Powered by",
-    "app_opendota": "Sister Site to OpenDota",
+    "app_opendota": "OpenDota",
     "app_privacy_terms": "Privacy & Terms",
     "app_blog": "Blog",
     "app_translate": "Translate",
@@ -11,6 +11,9 @@
     "app_netlify": "Deploys by Netlify",
     "app_gravitech": "A Gravitech LLC Site",
     "app_github": "Github",
+
+    "home_description":"Stats coming soon! While we wait, learn more about the game.",
+    "home_description2": "Part of the OpenDota project",
 
     "page_alliances_description": "View all Dota Underlords alliances, synergies, descriptions, and effects. Find the best hero combos!",
     "page_heroes_description": "View all Dota Underlords heroes, stats, descriptions, and abilities. Find the best heroes!",

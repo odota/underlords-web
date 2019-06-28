@@ -27,14 +27,12 @@ export default class HomePage extends React.Component<RouteComponentProps> {
     public render() {
         return <div className={styles.Container}>
             <header>
-                <h1>{ strings.app_name }</h1>
-                <h3>{ strings.app_description }</h3>
+                <h1 className={styles.LeadTitle}>{ strings.app_name }</h1>
+                <h3 className={styles.SecondTitle}>{ strings.app_description }</h3>
+                <p>{strings.home_description}</p>
+                <a href="//opendota.com">{strings.home_description2}</a>
             </header>
             <main>
-                <section>
-                    <p>Stats coming soon! While we wait, learn more about the game.</p>
-                    <a href="//opendota.com">Part of the OpenDota project</a>
-                </section>
                 <section className={styles.Links}>
                     <Link to={path.join(this.props.match.url, 'alliances')}>
                         <Collage urls={this.state.alliances.map((e) => {
