@@ -27,7 +27,7 @@ const PageLinks = () => {
     path: '//www.gravitech.io',
   }];
   return links.map(link => (
-    <a href={link.path} key={link.name} target="_blank" rel="noopener noreferrer">{link.name}</a>
+    <a href={link.path} key={link.path} target="_blank" rel="noopener noreferrer">{link.name}</a>
   ));
 };
 

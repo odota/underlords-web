@@ -1,5 +1,5 @@
 {
-    "General_OpenUnderlords": "OpenUnderlords",
+    "app_name": "OpenUnderlords",
     "app_description": "Open source Dota Underlords data platform",
     "app_powered_by": "Powered by",
     "app_opendota": "Sister Site to OpenDota",

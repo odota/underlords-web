@@ -3,7 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import AlliancesPage from '../AlliancesPage/AlliancesPage';
 import HeroesPage from '../HeroesPage/HeroesPage';
 import ItemsPage from '../ItemsPage/ItemsPage';
-import { InitLocalization, heroes, alliances } from '../Localization/Localization';
+import { InitLocalization, heroes, alliances, underlordsLoc } from '../Localization/Localization';
 import Header from '../Header';
 import Footer from '../Footer';
 import styles from './App.module.css';
@@ -12,6 +12,7 @@ import HeroCard from '../HeroCard/HeroCard';
 import ReactTooltip from 'react-tooltip';
 import commonStyles from '../../common.module.css';
 import AllianceCard from '../AllianceCard/AllianceCard';
+import HomePage from '../HomePage/HomePage';
 
 export default class App extends React.Component {
 
@@ -19,10 +20,19 @@ export default class App extends React.Component {
     initializing: true
   }
 
-   navbarPages = [
-    <Link key="header_alliances" to="/alliances">Alliances</Link>,
-    <Link key="header_heroes" to="/heroes">Heroes</Link>,
-    <Link key="header_items" to="/items">Items</Link>,
+  navbarPages = [
+    {
+      to: "/alliances",
+      name: "dac_ingame_tab_synergies"
+    },
+    {
+      to: "/heroes",
+      name: "dac_ingame_tab_heroes"
+    },
+    {
+      to: "/items",
+      name: "dac_ingame_tab_items"
+    }
   ];
 
   public async componentDidMount() {
@@ -34,9 +44,12 @@ export default class App extends React.Component {
     return this.state.initializing ?
       <div/>
       : <div>
-        <Header navbarPages={this.navbarPages} />
+        <Header navbarPages={this.navbarPages.map((e: {to: string, name: string}, i: number) => {
+          return <Link key={i} to={e.to}>{e.name.startsWith("dac") ? underlordsLoc[e.name] : e.name}</Link>
+        })} />
         <div className={styles.MainContainer}>
           <Switch>
+            <Route exact path="/" component={HomePage}/>
             <Route path="/alliances" component={AlliancesPage}/>
             <Route path="/heroes" component={HeroesPage}/>
             <Route path="/items" component={ItemsPage} />

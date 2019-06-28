@@ -3,7 +3,6 @@ import { Item } from '../../types';
 import { StripHtml } from '../../utils';
 import { underlordsLoc } from '../Localization/Localization';
 import commonStyles from '../../common.module.css';
-import { isBigIntLiteral } from '@babel/types';
 
 // https://api.opendota.com/apps/dota2/images/tooltips/gold.png
 // https://api.opendota.com/apps/dota2/images/tooltips/mana.png
@@ -37,12 +36,3 @@ export default class ItemmCard extends React.Component<{ item: Item}> {
         </div>
     }
 }
-
-                // <tr key={item}>
-                //     <td>{item}</td>
-                //     <td>{items[item as keyof typeof items].tier}</td>
-                //     <td>{underlordsLoc[items[item as keyof typeof items].displayName]}</td>
-                //     <td>{items[item as keyof typeof items].icon}</td>
-                //     <td>{items[item as keyof typeof items].type}</td>
-                //     <td>{items[item as keyof typeof items].cooldown}</td>
-                // </tr> 

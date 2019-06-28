@@ -6,9 +6,10 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import styled from 'styled-components';
+import constants from '../../constants';
 
 const StyledDrawer = styled(Drawer)`
-  background-color: rgba(0, 0, 0, 0.4) !important;
+  background-color: ${constants.defaultPrimaryColor} !important;
 `;
 
 const StyledMenuItem = styled(MenuItem)`
@@ -17,7 +18,7 @@ const StyledMenuItem = styled(MenuItem)`
 
 export default class BurgerMenu extends React.Component {
   static propTypes = {
-    menuItems: PropTypes.arrayOf({}),
+    menuItems: PropTypes.arrayOf(PropTypes.object),
   }
 
   constructor() {

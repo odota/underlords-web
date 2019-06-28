@@ -75,11 +75,11 @@ export default class HeroCard extends React.Component<{ hero: Hero, highlight?: 
                     { /* TODO get the top HP/damage value and show bar relative to max */ }
                     <h4 className={commonStyles.Midtitle}>Offense</h4>
                     {
-                        this.offensiveStats.map((e, i) => <StatBlock hero={hero} stat={e} highlight={highlight} />)
+                        this.offensiveStats.map((e, i) => <StatBlock key={i} hero={hero} stat={e} highlight={highlight} />)
                     }
                     <h4>Defense</h4>
                     {
-                        this.defensiveStats.map((e, i) => <StatBlock hero={hero} stat={e} highlight={highlight} />)
+                        this.defensiveStats.map((e, i) => <StatBlock key={i} hero={hero} stat={e} highlight={highlight} />)
                     }
                     <div className={commonStyles.Subtitle}>Alliances:</div>
                     { hero.keywords ? 

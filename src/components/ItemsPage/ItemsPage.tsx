@@ -60,7 +60,7 @@ export default class ItemsPage extends React.Component {
     public render() {
         return <div className={commonStyles.PageContainer}>
             <div className={commonStyles.PageSectionHeader}>
-                <h1>Items</h1>
+                <h1>{underlordsLoc["dac_ingame_tab_items"]}</h1>
                 <SortButtons sorts={this.sorts} 
                     sortFunction={this.sort}
                     currentSort={this.state.currentSort}

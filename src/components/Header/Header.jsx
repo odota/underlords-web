@@ -4,13 +4,12 @@ import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import Bug from 'material-ui/svg-icons/action/bug-report';
-import LogOutButton from 'material-ui/svg-icons/action/power-settings-new';
 import styled from 'styled-components';
 import Dropdown from '../Header/Dropdown';
 import constants from '../constants';
-// import AccountWidget from '../AccountWidget';
 import AppLogo from '../App/AppLogo';
 import BurgerMenu from './BurgerMenu';
+import { MediaQuery } from 'react-responsive';
 
 const REPORT_BUG_PATH = `//github.com/odota/underlords-ui/issues`;
 
@@ -82,7 +81,7 @@ class Header extends React.Component {
 
   render() {
     const {
-      location, navbarPages, disableSearch,
+      navbarPages
     } = this.props;
 
     const burgerItems = [
@@ -105,26 +104,17 @@ class Header extends React.Component {
     };
 
     const LinkGroup = () => (
-      <VerticalAlignToolbar>
-        {navbarPages.map(Page => (
-          <TabContainer key={Page.key}>
-            <div style={{ margin: '0 10px', textAlign: 'center', fontWeight: `${constants.fontWeightNormal} !important` }}>
-              {Page}
-            </div>
-          </TabContainer>
-      ))}
-      </VerticalAlignToolbar>
-    );
-
-    const SearchGroup = () => (
-      <VerticalAlignToolbar style={{ marginLeft: 20 }}>
-      </VerticalAlignToolbar>
-    );
-
-    const AccountGroup = () => (
-      <VerticalAlignToolbar>
-        {/* <AccountWidget /> */}
-      </VerticalAlignToolbar>
+      <MediaQuery minDeviceWidth={768}>
+        <VerticalAlignToolbar>
+          {navbarPages.map(Page => (
+            <TabContainer key={Page.key}>
+              <div style={{ margin: '0 10px', textAlign: 'center', fontWeight: `${constants.fontWeightNormal} !important` }}>
+                {Page}
+              </div>
+            </TabContainer>
+          ))}
+        </VerticalAlignToolbar>
+      </MediaQuery>
     );
 
     const SettingsGroup = ({ user }) => (

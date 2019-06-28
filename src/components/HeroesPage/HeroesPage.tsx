@@ -105,7 +105,7 @@ export default class HeroesPage extends React.Component {
     public render() {
         return <div className={commonStyles.PageContainer}>
             <div className={commonStyles.PageSectionHeader}>
-                <h1>Items</h1>
+                <h1>{underlordsLoc["dac_ingame_tab_heroes"]}</h1>
                 <SortButtons sorts={this.sorts} 
                     sortFunction={this.sortHeroes}
                     currentSort={this.state.currentSort}
