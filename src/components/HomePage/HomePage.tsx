@@ -1,5 +1,4 @@
 import React from 'react';
-import commonStyles from '../../common.module.css';
 import { strings, underlordsLoc, heroes, alliances } from '../Localization/Localization';
 import styles from './HomePage.module.css';
 import { Link } from 'react-router-dom';
@@ -37,21 +36,30 @@ export default class HomePage extends React.Component {
                 <section className={styles.Links}>
                     <Link to="/alliances">
                         <Collage urls={this.state.alliances.map((e) => {
-                            return `${process.env.PUBLIC_URL}/images/alliances/${e}.jpg`;
+                            return {
+                                alt: e,
+                                url: `${process.env.PUBLIC_URL}/images/alliances/${e}.jpg`
+                            };
                         })}/>
                         <h4>{underlordsLoc["dac_ingame_tab_synergies"]}</h4>
                     </Link>
                     <Link to="/heroes">
                         <Collage urls={this.state.heroes.map((e) => {
                             const hero = heroes[e as keyof typeof heroes];
-                            return GetHeroImage(hero.dota_unit_name);
+                            return {
+                                alt: hero.dota_unit_name,
+                                url: GetHeroImage(hero.dota_unit_name)
+                            };
                         })}/>
                         <h4>{underlordsLoc["dac_ingame_tab_heroes"]}</h4>
                     </Link>
                     <Link to="/items">
                         <Collage urls={this.state.items.map((e) => {
                             const item = items[e as keyof typeof items];
-                            return `${process.env.PUBLIC_URL}/images/items/${item.icon}_psd.png`;
+                            return {
+                                alt: item.icon,
+                                url: `${process.env.PUBLIC_URL}/images/items/${item.icon}_psd.png`
+                            };
                         })}/>
                         <h4>{underlordsLoc["dac_ingame_tab_items"]}</h4>
                     </Link>
@@ -61,7 +69,7 @@ export default class HomePage extends React.Component {
     }
 }
 
-const Collage = ( props: {urls: string[]}) => {
+const Collage = ( props: {urls: { alt: string, url: string}[]}) => {
     return <div className={styles.CollageContainer}>
         {
             props.urls.map((url) => {
@@ -70,7 +78,7 @@ const Collage = ( props: {urls: string[]}) => {
                     top: Math.random() * 125
                 };
                 
-                return <img src={url} style={style}/>
+                return <img alt={url.alt} src={url.url} style={style}/>
             })
         }
     </div>

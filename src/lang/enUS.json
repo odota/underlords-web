@@ -1,5 +1,6 @@
 {
     "app_name": "OpenUnderlords",
+    "app_title": "Dota Underlords stats, guides, and tips",
     "app_description": "Open source Dota Underlords data platform",
     "app_powered_by": "Powered by",
     "app_opendota": "Sister Site to OpenDota",
@@ -11,10 +12,8 @@
     "app_gravitech": "A Gravitech LLC Site",
     "app_github": "Github",
 
-    "sort_tier": "Tier",
-    "sort_name": "Name",
-    "sort_health": "Health",
-    "sort_damage": "Damage",
-    "sort_armor": "Armor",
-    "sort_type": "Type"
+    "page_alliances_description": "View all Dota Underlords alliances, synergies, descriptions, and effects. Find the best hero combos!",
+    "page_heroes_description": "View all Dota Underlords heroes, stats, descriptions, and abilities. Find the best heroes!",
+    "page_items_description": "View all Dota Underlords items, stats, descriptions, and effects. Find the best items!"
+
 }

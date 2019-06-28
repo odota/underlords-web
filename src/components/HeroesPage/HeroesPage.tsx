@@ -4,8 +4,9 @@ import commonStyles from '../../common.module.css';
 import { Hero } from '../../types';
 import HeroCard from '../HeroCard/HeroCard';
 import ReactTooltip from 'react-tooltip';
-import { underlordsLoc } from '../Localization/Localization';
+import { underlordsLoc, strings } from '../Localization/Localization';
 import SortButtons from '../SortButtons/SortButtons';
+import Helmet from 'react-helmet';
 
 export default class HeroesPage extends React.Component {
 
@@ -104,6 +105,11 @@ export default class HeroesPage extends React.Component {
 
     public render() {
         return <div className={commonStyles.PageContainer}>
+            <Helmet>
+                <title>{underlordsLoc["dac_ingame_tab_heroes"]} | {strings.app_name} | {strings.app_description}</title>
+                <meta name="description" content={strings.page_heroes_description} />
+                <meta name="og:description" content={strings.page_heroes_description} />
+            </Helmet>
             <div className={commonStyles.PageSectionHeader}>
                 <h1>{underlordsLoc["dac_ingame_tab_heroes"]}</h1>
                 <SortButtons sorts={this.sorts} 

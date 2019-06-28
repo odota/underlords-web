@@ -1,11 +1,12 @@
 import React from 'react';
 import items from 'underlordsconstants/build/underlords_items.json';
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
-import { underlordsLoc } from '../Localization/Localization';
+import { underlordsLoc, strings } from '../Localization/Localization';
 import commonStyles from '../../common.module.css';
 import ItemCard from '../ItemCard/ItemCard';
-import { Item, Items } from '../../types';
+import { Item } from '../../types';
 import SortButtons from '../SortButtons/SortButtons';
+import Helmet from 'react-helmet';
 
 export default class ItemsPage extends React.Component {
     
@@ -59,6 +60,11 @@ export default class ItemsPage extends React.Component {
 
     public render() {
         return <div className={commonStyles.PageContainer}>
+            <Helmet>
+                <title>{underlordsLoc["dac_ingame_tab_items"]} | {strings.app_name} | {strings.app_description}</title>
+                <meta name="description" content={strings.page_items_description} />
+                <meta name="og:description" content={strings.page_items_description} />
+            </Helmet>
             <div className={commonStyles.PageSectionHeader}>
                 <h1>{underlordsLoc["dac_ingame_tab_items"]}</h1>
                 <SortButtons sorts={this.sorts} 

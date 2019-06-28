@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './AllianceCard.module.css';
 import commonStyles from '../../common.module.css';
-import { underlordsLoc, abilitiesLoc } from '../Localization/Localization';
-import { Hero, Alliance, GameStrings } from '../../types';
+import { underlordsLoc } from '../Localization/Localization';
+import { Hero, Alliance, } from '../../types';
 import { GetHeroImage } from '../../utils';
 
 export default class AllianceCard extends React.Component<{ alliance: Alliance }> {

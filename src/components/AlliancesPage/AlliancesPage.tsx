@@ -1,10 +1,11 @@
 import React from 'react';
 import commonStyles from '../../common.module.css';
 import AllianceCard from '../AllianceCard/AllianceCard';
-import { alliances, underlordsLoc } from '../Localization/Localization';
+import { alliances, underlordsLoc, strings } from '../Localization/Localization';
 import { Alliance } from '../../types';
 import ReactTooltip from 'react-tooltip';
 import SortButtons from '../SortButtons/SortButtons';
+import Helmet from 'react-helmet';
 
 export default class AlliancesPage extends React.Component {
 
@@ -74,6 +75,11 @@ export default class AlliancesPage extends React.Component {
 
   public render() {
     return <div className={commonStyles.PageContainer}>
+          <Helmet>
+              <title>{underlordsLoc["dac_ingame_tab_synergies"]} | {strings.app_name} | {strings.app_description}</title>
+              <meta name="description" content={strings.page_alliances_description} />
+              <meta name="og:description" content={strings.page_alliances_description} />
+          </Helmet>
           <div className={commonStyles.PageSectionHeader}>
             <h1>{underlordsLoc["dac_ingame_tab_synergies"]}</h1>
             <SortButtons sorts={this.sorts} 

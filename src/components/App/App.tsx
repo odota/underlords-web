@@ -3,7 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import AlliancesPage from '../AlliancesPage/AlliancesPage';
 import HeroesPage from '../HeroesPage/HeroesPage';
 import ItemsPage from '../ItemsPage/ItemsPage';
-import { InitLocalization, heroes, alliances, underlordsLoc } from '../Localization/Localization';
+import { InitLocalization, heroes, alliances, underlordsLoc, strings } from '../Localization/Localization';
 import Header from '../Header';
 import Footer from '../Footer';
 import styles from './App.module.css';
@@ -13,6 +13,7 @@ import ReactTooltip from 'react-tooltip';
 import commonStyles from '../../common.module.css';
 import AllianceCard from '../AllianceCard/AllianceCard';
 import HomePage from '../HomePage/HomePage';
+import { Helmet } from 'react-helmet';
 
 export default class App extends React.Component {
 
@@ -44,6 +45,12 @@ export default class App extends React.Component {
     return this.state.initializing ?
       <div/>
       : <div>
+        <Helmet>
+            <meta charSet="utf-8" />
+            <title>{strings.app_name} | {strings.app_title}</title>
+            <meta name="description" content={strings.app_description} />
+            <meta property="og:description" content={strings.app_description}></meta>
+        </Helmet>
         <Header navbarPages={this.navbarPages.map((e: {to: string, name: string}, i: number) => {
           return <Link key={i} to={e.to}>{e.name.startsWith("dac") ? underlordsLoc[e.name] : e.name}</Link>
         })} />

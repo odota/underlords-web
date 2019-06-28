@@ -2,7 +2,6 @@ import React from 'react';
 import { IconArrowUp, IconArrowDown } from '../Icons';
 import commonStyles from '../../common.module.css';
 import { underlordsLoc } from '../Localization/Localization';
-import styles from './HomePage.module.css';
 
 type Props = {
     sorts: {
