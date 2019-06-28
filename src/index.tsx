@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import './index.css';
 import App from './components/App/App';
 import GlobalStyle from './components/App/GlobalStyle';
@@ -11,6 +11,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import { createBrowserHistory } from 'history';
 import ReactGA from 'react-ga';
+import { SUPPORTED_LANGUAGES } from './utils';
 
 ReactGA.initialize('UA-55757642-4');
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -24,7 +25,8 @@ ReactDOM.render(
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme, muiTheme)}>
         <GlobalStyle />
         <Router>
-            <App/>
+            <Route path={`/:lang(${Object.values(SUPPORTED_LANGUAGES).join("|")})`} component={App}/>
+            <Redirect to="/en"/>
         </Router>
     </MuiThemeProvider>    
 , document.getElementById('root'));

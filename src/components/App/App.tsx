@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, RouteComponentProps } from 'react-router-dom';
 import AlliancesPage from '../AlliancesPage/AlliancesPage';
 import HeroesPage from '../HeroesPage/HeroesPage';
 import ItemsPage from '../ItemsPage/ItemsPage';
@@ -15,7 +15,7 @@ import AllianceCard from '../AllianceCard/AllianceCard';
 import HomePage from '../HomePage/HomePage';
 import { Helmet } from 'react-helmet';
 
-export default class App extends React.Component {
+export default class App extends React.Component<RouteComponentProps> {
 
   state = {
     initializing: true
@@ -23,21 +23,21 @@ export default class App extends React.Component {
 
   navbarPages = [
     {
-      to: "/alliances",
+      to: `${this.props.match.url}/alliances`,
       name: "dac_ingame_tab_synergies"
     },
     {
-      to: "/heroes",
+      to: `${this.props.match.url}/heroes`,
       name: "dac_ingame_tab_heroes"
     },
     {
-      to: "/items",
+      to: `${this.props.match.url}/items`,
       name: "dac_ingame_tab_items"
     }
   ];
 
   public async componentDidMount() {
-    await InitLocalization();
+    await InitLocalization(this.props.match);
     this.setState({initializing: false});
   }
 
@@ -56,10 +56,10 @@ export default class App extends React.Component {
         })} />
         <div className={styles.MainContainer}>
           <Switch>
-            <Route exact path="/" component={HomePage}/>
-            <Route path="/alliances" component={AlliancesPage}/>
-            <Route path="/heroes" component={HeroesPage}/>
-            <Route path="/items" component={ItemsPage} />
+            <Route exact path={`${this.props.match.path}/`} component={HomePage}/>
+            <Route path={`${this.props.match.path}/alliances`} component={AlliancesPage}/>
+            <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
+            <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
           </Switch>
         </div>
         <ReactTooltip id="hero" place="right" className={commonStyles.Tooltip} effect="solid" getContent={ (dataTip) => {
