@@ -25,7 +25,9 @@ export default class App extends React.Component<RouteComponentProps> {
 
   state = {
     initializing: true,
-    lang: 'en'
+    lang: 'en',
+    deferredPrompt: null,
+    showInstallPrompt: false
   }
 
   /* If user goes to /ja/alliances but their language is
@@ -68,6 +70,15 @@ export default class App extends React.Component<RouteComponentProps> {
       initializing: false,
       lang: lang
     });
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+      this.setState({
+        deferredPrompt: e, // Stash the event so it can be triggered later.
+        showInstallPrompt: true
+      });
+    });
   }
 
   public render() {
@@ -96,13 +107,29 @@ export default class App extends React.Component<RouteComponentProps> {
         })} />
           <Switch>
             <Route exact path={`${this.props.match.path}/`} component={HomePage}/>
-            <div className={styles.MainContainer}>
-              <Route path={`${this.props.match.path}/alliances`} component={AlliancesPage}/>
-              <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
-              <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
-              <Route component={FourOFourPage} />
+              <div className={styles.MainContainer}>
+                <Switch>
+                  <Route path={`${this.props.match.path}/alliances`} component={AlliancesPage}/>
+                  <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
+                  <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
+                  <Route component={FourOFourPage} />
+                </Switch>
             </div>
           </Switch>
+        {
+          this.state.showInstallPrompt ? 
+          <div>
+            <button onClick={(e) => {
+              this.setState({
+                showInstallPrompt: false
+              }, () => {
+                // @ts-ignore
+                this.state.deferredPrompt.prompt()
+              })
+            }}>Yeah I want that</button>
+          </div>
+          : <div/>
+        }
         <ReactTooltip id="hero" place="right" className={commonStyles.Tooltip} effect="solid" getContent={ (dataTip) => {
           const hero: Hero = heroes[dataTip as keyof typeof heroes];
           return hero ? <HeroCard hero={hero} /> : null;
