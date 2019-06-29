@@ -118,15 +118,32 @@ export default class App extends React.Component<RouteComponentProps> {
           </Switch>
         {
           this.state.showInstallPrompt ? 
-          <div>
-            <button onClick={(e) => {
-              this.setState({
-                showInstallPrompt: false
-              }, () => {
-                // @ts-ignore
-                this.state.deferredPrompt.prompt()
-              })
-            }}>Yeah I want that</button>
+          <div className={styles.UserPromptModule}>
+            <div className={styles.UserPromptModuleContainer}>
+              <div className={commonStyles.CardCapSmallImage}>
+                <img alt="logo" src={`${process.env.PUBLIC_URL}/logo.svg`} />
+                <h3>{strings.install_header}</h3>
+              </div>
+              <div className={commonStyles.CardBody}>
+                <p>{strings.install_description}</p>
+                <p>{strings.install_description2}</p>
+                <button
+                  className={`${commonStyles.Button} ${styles.Primary}`}
+                  onClick={(e) => {
+                    this.setState({
+                      showInstallPrompt: false
+                    }, () => {
+                      // @ts-ignore
+                      this.state.deferredPrompt.prompt()
+                  })
+                }}><div>{strings.install_yes}</div></button>
+                <button
+                  className={`${commonStyles.Button} ${styles.Secondary}`}
+                  onClick={(e) => { this.setState({showInstallPrompt: false})}}>
+                  <div>{strings.install_no}</div>
+                </button>
+              </div>
+            </div>
           </div>
           : <div/>
         }

@@ -9,3 +9,30 @@
     max-width: 1200px;
     margin: 0 auto;
 }
+
+.UserPromptModule {
+    position: fixed;
+    bottom: 30px;
+    z-index: 100;
+    border-radius: 8px;
+    right: 0px;
+}
+
+.UserPromptModuleContainer {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: calc(100% - 16px);
+    margin: 0 8px 30px 8px;
+    border-radius: 8px; 
+    color: white;
+    overflow: hidden;
+    background-color: #9B7EAC;
+}
+
+.Primary {
+    background-color: #9DCEDC;
+}
+
+.Secondary {
+    background-color: #837DB0;
+}

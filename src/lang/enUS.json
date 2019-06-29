@@ -13,6 +13,11 @@
     "app_github": "Github",
     "app_report_bug": "BUG!? Report dat!",
 
+    "install_header": "Add to Home Screen?",
+    "install_description": "Just like Underlords, OpenUnderlords works offline. Access guides and stats wherever you are.",
+    "install_description2": "It's less than 1 MB on your phone and won't drain your battery.",
+    "install_yes": "Yes I want that!",
+    "install_no": "No thanks",
     "general_tier": "Tier",
 
     "home_description": "Stats coming soon! While we wait, learn more about the game.",
