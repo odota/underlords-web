@@ -1,12 +1,12 @@
 import React from 'react';
 import { Item } from '../../types';
 import { StripHtml } from '../../utils';
-import { underlordsLoc } from '../Localization/Localization';
+import { underlordsLoc, strings } from '../Localization/Localization';
 import commonStyles from '../../common.module.css';
 
 // https://api.opendota.com/apps/dota2/images/tooltips/gold.png
 // https://api.opendota.com/apps/dota2/images/tooltips/mana.png
-export default class ItemmCard extends React.Component<{ item: Item}> {
+export default class ItemCard extends React.Component<{ item: Item}> {
 
     public render() {
         const { item } = this.props;
@@ -19,8 +19,7 @@ export default class ItemmCard extends React.Component<{ item: Item}> {
                 <h1 className={commonStyles.Title} style={{fontSize: '18px'}}>{displayName}</h1>
             </div>
             <div className={commonStyles.CardBody}>
-                <div className={commonStyles.Midtitle}>Tier {item.tier}</div>
-                <div className={commonStyles.Subtitle}>Type: {underlordsLoc[`dac_dev_item_${item.type}`]}</div>
+                <div className={commonStyles.Midtitle}>{strings.general_tier} {item.tier} {underlordsLoc[`dac_dev_item_${item.type}`]}</div>
                 { item.cooldown ? 
                     <div className={commonStyles.InlineImageContainer}>
                         <img alt="cooldown" src={"https://api.opendota.com/apps/dota2/images/tooltips/cooldown.png"}/>
@@ -29,8 +28,8 @@ export default class ItemmCard extends React.Component<{ item: Item}> {
                     : <div/>
                 }
                 <div className={commonStyles.DescriptionCard}>
-                    <p>{description}</p>
-                    <small className={commonStyles.LoreText}>{lore}</small>
+                    <p className={commonStyles.DescriptionText}>{description}</p>
+                    <div className={commonStyles.LoreText}>{lore}</div>
                 </div>
             </div>
         </div>

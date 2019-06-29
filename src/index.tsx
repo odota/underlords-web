@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import './index.css';
+import './index.module.scss';
 import App from './components/App/App';
-import GlobalStyle from './components/App/GlobalStyle';
 import muiTheme from './components/App/muiTheme';
 import * as serviceWorker from './serviceWorker';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -24,7 +23,6 @@ history.listen((location) => {
 ReactDOM.render(
     // @ts-ignore
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme, muiTheme)}>
-        <GlobalStyle />
         <Router>
             <Switch>
                 <Route path={`/:lang(${Object.values(SUPPORTED_LANGUAGES).join("|")})`} component={App}/>

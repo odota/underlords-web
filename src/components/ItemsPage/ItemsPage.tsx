@@ -76,7 +76,7 @@ export default class ItemsPage extends React.Component {
                 <div className={commonStyles.CardsContainer}>
                     { this.state.order.map((key) => {
                         const item: Item = items[key as keyof typeof items];
-                        return <ItemCard item={item} />
+                        return <ItemCard key={key} item={item} />
                     })}
                 </div>
             </ErrorBoundary>

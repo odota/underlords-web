@@ -11,6 +11,7 @@ export function StripHtml(html: string) {
     return `${process.env.PUBLIC_URL}/images/portraits/${dotaName}_png.png`;
  }
 
+ // TODO capitalize
  export const SUPPORTED_LANGUAGES = {
    "português do Brasil": "pt-BR",
    "български": "bg",

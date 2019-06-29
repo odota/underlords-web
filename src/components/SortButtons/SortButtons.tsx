@@ -17,9 +17,9 @@ export default class SortButtons extends React.Component<Props> {
 
     public render() {
         const { sorts, sortFunction, currentSort, isAscending } = this.props;
-        return <div className={commonStyles.SortButtonsContainer}>
+        return <div>
             {sorts.map((sort, i) => <button
-                className={ currentSort === sort.by ? commonStyles.ActiveButton : "" }
+                className={`${commonStyles.Button} ${currentSort === sort.by ? commonStyles.ActiveButton : "" }`}
                 onClick={(e) => sortFunction(sort.by)}
                 key={i}>
                 <div className={commonStyles.InlineImageContainer}>
