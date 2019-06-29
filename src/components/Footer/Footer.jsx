@@ -152,7 +152,7 @@ const Footer = () => (
     <main>
       <div className="links">
         <div className="logoNsocial">
-          <AppLogo />
+          <AppLogo url={process.env.PUBLIC_URL}/>
           <SocialLinks/>
         </div>
         <small className="about">

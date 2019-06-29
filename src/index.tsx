@@ -12,6 +12,7 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import { createBrowserHistory } from 'history';
 import ReactGA from 'react-ga';
 import { SUPPORTED_LANGUAGES } from './utils';
+import { getLanguage } from './components/Localization/Localization';
 
 ReactGA.initialize('UA-55757642-4');
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -27,7 +28,7 @@ ReactDOM.render(
         <Router>
             <Switch>
                 <Route path={`/:lang(${Object.values(SUPPORTED_LANGUAGES).join("|")})`} component={App}/>
-                <Redirect to="/en/"/>
+                <Redirect to={`/${getLanguage()}/`}/>
             </Switch>
         </Router>
     </MuiThemeProvider>    
