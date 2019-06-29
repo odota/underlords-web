@@ -5,7 +5,7 @@ import { strings } from '../Localization/Localization';
 export default () => {
   const links = [{
     tooltip: strings.app_github,
-    path: `//github.com/odota/underlords-ui`,
+    path: `//github.com/odota/underlords-web`,
     icon: <IconGithub />,
   }];
 
