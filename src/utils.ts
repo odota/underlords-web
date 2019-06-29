@@ -1,3 +1,7 @@
+// @ts-ignore
+import path from 'path-browserify';
+import { getLanguage } from './components/Localization/Localization';
+
 export function StripHtml(html: string) {
     var doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent || "";
@@ -37,3 +41,7 @@ export function StripHtml(html: string) {
  };
 
  export const GITHUB_ISSUES_LINK = '//github.com/odota/underlords-web/issues';
+
+ export function generateURL(p: string) {
+   return path.join("/", getLanguage(), p);
+ }

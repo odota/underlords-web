@@ -1,9 +1,9 @@
 import React from 'react';
-import { Switch, Route, Link, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Switch, Route, Link, RouteComponentProps } from 'react-router-dom';
 import AlliancesPage from '../AlliancesPage/AlliancesPage';
 import HeroesPage from '../HeroesPage/HeroesPage';
 import ItemsPage from '../ItemsPage/ItemsPage';
-import { InitLocalization, heroes, alliances, underlordsLoc, strings } from '../Localization/Localization';
+import { InitLocalization, heroes, alliances, underlordsLoc, strings, getLanguage } from '../Localization/Localization';
 import Header from '../Header';
 import Footer from '../Footer';
 import styles from './App.module.css';
@@ -14,9 +14,8 @@ import commonStyles from '../../common.module.css';
 import AllianceCard from '../AllianceCard/AllianceCard';
 import HomePage from '../HomePage/HomePage';
 import { Helmet } from 'react-helmet';
-import { SUPPORTED_LANGUAGES } from '../../utils';
-// @ts-ignore
-import path from 'path-browserify';
+import { generateURL, SUPPORTED_LANGUAGES } from '../../utils';
+import FourOFourPage from '../FourOFourPage/FourOFourPage';
 
 type MatchParams = {
   [lang: string]: string
@@ -25,35 +24,50 @@ type MatchParams = {
 export default class App extends React.Component<RouteComponentProps> {
 
   state = {
-    initializing: true
+    initializing: true,
+    lang: 'en'
   }
 
-  // Sometimes match.url has an ending '/'
+  /* If user goes to /ja/alliances but their language is
+   * pt, we redirect to /pt/alliances by pushing to history (see componentDidMount).
+   * However, this.props.match doesn't update and still returns /ja/heroes as the links
+   * to other places of the site since /ja still matches to the parent <Route/> in index.tsx.
+   * Instead, we just use the language as the root path.
+   * 
+   * It looks like this is only an issue for links in this component since it's the first
+   * child of the parent route. HomePage, for example, matches against the updated value
+   * which allows us to use match.url.
+   */
   navbarPages = [
     {
-      to: path.join(this.props.match.url, 'alliances'),
+      to: generateURL('alliances'),
       name: "dac_ingame_tab_synergies"
     },
     {
-      to: path.join(this.props.match.url, 'heroes'),
+      to: generateURL('heroes'),
       name: "dac_ingame_tab_heroes"
     },
     {
-      to: path.join(this.props.match.url, 'items'),
+      to: generateURL('items'),
       name: "dac_ingame_tab_items"
     }
   ];
 
   public async componentDidMount() {
-    let lang = 'en';
+    let lang = getLanguage();
+    // If user langauage is different from URL lang, we redirect
+    // so that URL is correct
     if ( this.props.match && this.props.match.params ) {
       const params = this.props.match.params as MatchParams;
-      if (params && params.lang) {
-          lang = params.lang;
+      if (params && params.lang && lang !== params.lang) {
+        this.props.history.push(window.location.pathname.replace(/[^/][^/]*/, lang))
       }
     }
     await InitLocalization(lang);
-    this.setState({initializing: false});
+    this.setState({
+      initializing: false,
+      lang: lang
+    });
   }
 
   public render() {
@@ -61,17 +75,19 @@ export default class App extends React.Component<RouteComponentProps> {
       <div/>
       : <div className={styles.AppContainer}>
         <Helmet>
+            <html lang={this.state.lang} />
             <meta charSet="utf-8" />
             <title>{strings.app_name} | {strings.app_title}</title>
             <meta name="description" content={strings.app_description} />
             <meta property="og:description" content={strings.app_description}></meta>
             {
-              Object.values(SUPPORTED_LANGUAGES).map((lang) => {
-                // @ts-ignore
+              Object.values(SUPPORTED_LANGUAGES).map((lang, i) => {
+                // @ts-ignore - hreflang isn't supposed to be here accoding to ts
                 return <link
+                  key={i}
                   rel="alternate"
                   hreflang={lang}
-                  href={(new URL(window.location.pathname.replace(/[^\/][^\/]*/, lang), window.location.href)).href}/>
+                  href={(new URL(window.location.pathname.replace(/[^/][^/]*/, lang), window.location.href)).href}/>
               })
             }
         </Helmet>
@@ -84,6 +100,7 @@ export default class App extends React.Component<RouteComponentProps> {
               <Route path={`${this.props.match.path}/alliances`} component={AlliancesPage}/>
               <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
               <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
+              <Route component={FourOFourPage} />
             </div>
           </Switch>
         <ReactTooltip id="hero" place="right" className={commonStyles.Tooltip} effect="solid" getContent={ (dataTip) => {

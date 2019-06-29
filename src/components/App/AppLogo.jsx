@@ -14,7 +14,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const AppLogo = ({ size, strings, url }) => (
+const AppLogo = ({ size, url }) => (
   <StyledLink to={url}>
     <span style={{ fontSize: size }}>
       {`<OpenUnderlords/>`}

@@ -33,6 +33,7 @@ export default class LocalizationMenu extends React.Component {
                 <MenuItem
                     key={name}
                     primaryText={name}
+                    onClick={(e) => { localStorage.setItem('lang', lang)}}
                 />
             </a>))}
         </LanguageContainerDiv>
