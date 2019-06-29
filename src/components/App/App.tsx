@@ -96,11 +96,13 @@ export default class App extends React.Component<RouteComponentProps> {
         })} />
           <Switch>
             <Route exact path={`${this.props.match.path}/`} component={HomePage}/>
-            <div className={styles.MainContainer}>
-              <Route path={`${this.props.match.path}/alliances`} component={AlliancesPage}/>
-              <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
-              <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
-              <Route component={FourOFourPage} />
+              <div className={styles.MainContainer}>
+                <Switch>
+                  <Route path={`${this.props.match.path}/alliances`} component={AlliancesPage}/>
+                  <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
+                  <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
+                  <Route component={FourOFourPage} />
+                </Switch>
             </div>
           </Switch>
         <ReactTooltip id="hero" place="right" className={commonStyles.Tooltip} effect="solid" getContent={ (dataTip) => {
