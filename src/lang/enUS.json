@@ -13,7 +13,9 @@
     "app_github": "Github",
     "app_report_bug": "BUG!? Report dat!",
 
-    "home_description":"Stats coming soon! While we wait, learn more about the game.",
+    "general_tier": "Tier",
+
+    "home_description": "Stats coming soon! While we wait, learn more about the game.",
     "home_description2": "Part of the OpenDota project",
 
     "page_alliances_description": "View all Dota Underlords alliances, synergies, descriptions, and effects. Find the best hero combos!",

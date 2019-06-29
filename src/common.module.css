@@ -11,10 +11,15 @@
     margin: 5px 0 5px 0;
 }
 
+.DescriptionText {
+    font-size: 13px;
+    color: lightgray;
+}
+
 .LoreText {
-    text-transform: uppercase;
     color: gray;
     font-size: 11px;
+    line-height: 1.5em;
 }
 
 .Blue {

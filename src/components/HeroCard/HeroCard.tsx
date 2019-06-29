@@ -1,5 +1,5 @@
 import React from 'react';
-import { underlordsLoc, abilitiesLoc } from '../Localization/Localization';
+import { underlordsLoc, abilitiesLoc, strings } from '../Localization/Localization';
 import abilities from 'underlordsconstants/build/underlords_abilities.json';
 import styles from './HeroCard.module.css';
 import commonStyles from '../../common.module.css';
@@ -69,7 +69,7 @@ export default class HeroCard extends React.Component<{ hero: Hero, highlight?: 
                             <div className={commonStyles.Midtitle}>
                                 {underlordsLoc["dac_hero_unit_cost"] ?
                                     underlordsLoc["dac_hero_unit_cost"].replace("{i:UnitCost}", hero.draftTier)
-                                    : `Tier ${hero.draftTier}`}
+                                    : `${strings.general_tier} ${hero.draftTier}`}
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@ const AbilityCard = ( props: { abilityKey: string} ) => {
             </div>
             <h3>{name}</h3>
         </div>
-        <p>{description}</p>
-        <small className={commonStyles.LoreText}>{lore}</small>
+        <p className={commonStyles.DescriptionText}>{description}</p>
+        <div className={commonStyles.LoreText}>{lore}</div>
     </div>;
 }
