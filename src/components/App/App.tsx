@@ -27,7 +27,8 @@ export default class App extends React.Component<RouteComponentProps> {
     initializing: true,
     lang: 'en',
     deferredPrompt: null,
-    showInstallPrompt: false
+    doNotPromptInstall: localStorage.getItem('promptInstall'),
+    showInstallPrompt: false,
   }
 
   /* If user goes to /ja/alliances but their language is
@@ -117,7 +118,7 @@ export default class App extends React.Component<RouteComponentProps> {
             </div>
           </Switch>
         {
-          this.state.showInstallPrompt ? 
+          !this.state.doNotPromptInstall && this.state.showInstallPrompt ? 
           <div className={styles.UserPromptModule}>
             <div className={styles.UserPromptModuleContainer}>
               <div className={commonStyles.CardCapSmallImage}>
@@ -134,12 +135,15 @@ export default class App extends React.Component<RouteComponentProps> {
                       showInstallPrompt: false
                     }, () => {
                       // @ts-ignore
-                      this.state.deferredPrompt.prompt()
+                      this.state.deferredPrompt.prompt();
                   })
                 }}><div>{strings.install_yes}</div></button>
                 <button
                   className={`${commonStyles.Button} ${styles.Secondary}`}
-                  onClick={(e) => { this.setState({showInstallPrompt: false})}}>
+                  onClick={(e) => {
+                    this.setState({showInstallPrompt: false});
+                    localStorage.setItem('promptInstall', 'NO');
+                  }}>
                   <div>{strings.install_no}</div>
                 </button>
               </div>
