@@ -30,5 +30,7 @@
 
     "th_count": "Count",
     "th_synergy": "Synergy",
-    "th_bonus": "Bonus"
+    "th_bonus": "Bonus",
+
+    "search_hero": "Search for hero..."
 }
