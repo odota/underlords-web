@@ -132,7 +132,7 @@ input[type="text"], textarea {
     align-items: center;
 }
 
-@media only screen and (max-width: 830px) {
+@media (max-width: 830px) {
     .teamBuilderPageContainer {
         flex-wrap: wrap;
     }
@@ -148,4 +148,4 @@ input[type="text"], textarea {
     .heroesSelectionArea {
         flex-grow: 2;
     }
-  }
+}
