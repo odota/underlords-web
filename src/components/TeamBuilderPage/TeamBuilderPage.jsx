@@ -17,9 +17,6 @@ function transformName(str) {
 }
 
 export default class TeamBuilderPage extends React.Component {
-  static propTypes = {
-
-  }
 
   state = {
     searchValue: "",
