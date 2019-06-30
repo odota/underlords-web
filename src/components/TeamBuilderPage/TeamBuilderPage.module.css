@@ -1,7 +1,7 @@
 .teamBuilderPageContainer {
     display: flex;
-    width: 1000px;
     margin-bottom: 50px;
+    max-width: 1000px;
     margin-top: 40px;
 }
 
@@ -30,7 +30,7 @@
 
 .heroesSelectionArea {
     display: flex;
-    flex-basis: 30%;
+    flex-basis: 306px;
     flex-wrap: wrap;
     flex-shrink: 0;
     height: 0%;
@@ -81,7 +81,7 @@ input[type="text"], textarea {
 }
 
 .teamArea {
-    flex-basis: 70%;
+    flex-basis: 664px;
     border-left: 1px solid rgba(255, 255, 255, 0.05);
     padding-left: 30px;
     margin-left: 30px;
@@ -131,3 +131,21 @@ input[type="text"], textarea {
     display: flex;
     align-items: center;
 }
+
+@media only screen and (max-width: 830px) {
+    .teamBuilderPageContainer {
+        flex-wrap: wrap;
+    }
+    .teamBuilderPageContainer {
+        flex-wrap: wrap;
+    }
+    .teamArea { 
+        margin-left: 0px;
+        padding-left:0px;
+        flex-grow: 2;
+        border: none;
+    }
+    .heroesSelectionArea {
+        flex-grow: 2;
+    }
+  }
