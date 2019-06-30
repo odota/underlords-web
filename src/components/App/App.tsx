@@ -56,7 +56,7 @@ export default class App extends React.Component<RouteComponentProps> {
     },
     {
       to: generateURL('builder'),
-      name: "Team Builder"
+      name: "app_team_builder"
     }
   ];
 
@@ -108,7 +108,7 @@ export default class App extends React.Component<RouteComponentProps> {
             }
         </Helmet>
         <Header {...this.props.match} navbarPages={this.navbarPages.map((e: {to: string, name: string}, i: number) => {
-          return <Link key={i} to={e.to}>{e.name.startsWith("dac") ? underlordsLoc[e.name] : e.name}</Link>
+          return <Link key={i} to={e.to}>{e.name.startsWith("dac") ? underlordsLoc[e.name] : strings[e.name] || e.name}</Link>
         })} />
           <Switch>
             <Route exact path={`${this.props.match.path}/`} component={HomePage}/>
