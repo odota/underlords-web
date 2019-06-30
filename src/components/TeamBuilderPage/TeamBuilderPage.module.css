@@ -1,0 +1,133 @@
+.teamBuilderPageContainer {
+    display: flex;
+    width: 1000px;
+    margin-bottom: 50px;
+    margin-top: 40px;
+}
+
+.teamBuilderPageContainer table {
+    border: 1px solid rgba(255,255,255,0.05);
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px 0px;
+}
+
+.teamBuilderPageContainer thead {
+    background-color: rgb(46, 70, 90);
+}
+
+.teamBuilderPageContainer table td, th {
+    font-size: 15px;
+    padding: 10px;
+}
+
+.teamBuilderPageContainer table th {
+    font-weight: 550;
+}
+
+.teamBuilderPageContainer table thead, tr {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.heroesSelectionArea {
+    display: flex;
+    flex-basis: 30%;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    height: 0%;
+    padding: 0px 3px 3px 3px;
+}
+
+.title {
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.heroImageSelectionArea {
+    height: 50px;
+    width: 50px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.heroImageSelectionArea:hover {
+    opacity: 0.3;
+}
+
+.searchInputContainer {
+    flex-basis: 100%;
+    margin: 0px 0px 12px 4px;
+}
+
+.searchInput {
+    display: inline-block;
+    padding: 4px 6px 6px 6px;
+    border: 1px solid rgba(15, 170, 226, 0.46);
+}
+
+input[type="text"], textarea {
+    border: none;
+    outline: none;
+    color: white;
+    caret-color: white;
+    background-color : transparent;
+  }
+
+.searchIcon {
+    font-size: 25px;
+    line-height: 0px;
+    margin-right: 5px;
+    color: rgba(255, 255, 255, 0.63);
+}
+
+.teamArea {
+    flex-basis: 70%;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding-left: 30px;
+    margin-left: 30px;
+}
+
+.selectedHeroesArea {
+    display: flex;  
+    flex-wrap: wrap;
+}
+
+.heroImageTeamAreaContainer {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-direction: column;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.heroImageTeamArea:hover {
+    border: 1px solid white;
+}
+
+.heroImageTeamArea {
+    height: 80px;
+    width: 80px;
+    margin: 3px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.heroName {
+    text-align: center;
+    line-height: 15px;
+}
+
+.allianceImg {
+    height: 28px;
+    width: 28px;
+    margin-right: 6px;
+}
+
+.synergyText {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}

@@ -25,6 +25,9 @@
 
     "page_alliances_description": "View all Dota Underlords alliances, synergies, descriptions, and effects. Find the best hero combos!",
     "page_heroes_description": "View all Dota Underlords heroes, stats, descriptions, and abilities. Find the best heroes!",
-    "page_items_description": "View all Dota Underlords items, stats, descriptions, and effects. Find the best items!"
+    "page_items_description": "View all Dota Underlords items, stats, descriptions, and effects. Find the best items!",
 
+    "th_count": "Count",
+    "th_synergy": "Synergy",
+    "th_bonus": "Bonus"
 }
