@@ -142,7 +142,7 @@ export default class App extends React.Component<RouteComponentProps> {
                   className={`${commonStyles.Button} ${styles.Secondary}`}
                   onClick={(e) => {
                     this.setState({showInstallPrompt: false});
-                    localStorage.setItem('installPrompt', 'NO');
+                    localStorage.setItem('promptInstall', 'NO');
                   }}>
                   <div>{strings.install_no}</div>
                 </button>
