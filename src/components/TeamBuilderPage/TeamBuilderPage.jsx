@@ -7,6 +7,39 @@ import { GetHeroImage } from "../../utils";
 import { underlordsLoc } from '../Localization/Localization';
 import { strings } from './../Localization/Localization';
 
+const Synergy = ({synergy, count, level, levelUnitCount}) => {
+  const alliance = alliances[synergy];
+  const tiers = alliance.levels.map((level,i) => level.unitcount - (i > 0 ? alliance.levels[i-1].unitcount : 0));
+  let c = count;
+  return(
+    <div className={styles.activeAllianceContainerOuter}>
+      <div className={styles.activeAllianceContainer} style={{backgroundColor: `rgba(${alliance.color.split(' ').join(',')},.22)`}}>
+        <div className={styles.allianceImgContainer}>
+          <img className={styles.allianceImg} alt={synergy} src={`${process.env.PUBLIC_URL}/images/alliances/${synergy}.jpg`} />
+        </div>
+        <div className={styles.allianceTiersContainer}>
+          {
+            tiers.map(tier => {
+              return(
+                <div className={styles.allianceTier}>
+                  {
+                    [...Array(tier)].map(_ => {
+                      c = c - 1;
+                      return(
+                        <div className={`${styles.tierCount} ${c >= 0 ? styles.activeCount : null}`}></div>
+                      )
+                    })
+                  }
+                </div>    
+              )
+            })
+          }            
+        </div>
+      </div>
+    {level ? <div className={styles.synergyDescription}>{`(${levelUnitCount}) ${underlordsLoc[`dac_synergy_desc_${synergy}_${level}`]}`}</div> : null}
+  </div>
+  )
+}
 
 function transformName(str) {
   const splitStr = str.toLowerCase().split('_');
@@ -79,7 +112,7 @@ export default class TeamBuilderPage extends React.Component {
           <div className={styles.searchInputContainer}>
             <div className={styles.searchInput}>
               <span className={styles.searchIcon}>&#8981;</span>
-              <input type="text" placeholder="Search for hero..." value={this.state.searchValue} onChange={this.handleSearchChange}>
+              <input type="text" placeholder={strings.search_hero} value={this.state.searchValue} onChange={this.handleSearchChange}>
               </input>
             </div>
           </div>
@@ -122,31 +155,18 @@ export default class TeamBuilderPage extends React.Component {
               </div>
               <div>
                 <h2 className={styles.title}>{underlordsLoc['dac_ingame_tab_synergies']}</h2>
-                <table>
-                  <thead>
-                    <th>{strings.th_synergy}</th>
-                    <th>{strings.th_count}</th>
-                    <th>{strings.th_bonus}</th>
-                  </thead>
-                  <tbody>
-                    {
-                      Object.keys(this.state.synergies).map(key => { 
-                        const {level, count, levelUnitCount} = this.state.synergies[key]
-                        return (
-                          <tr>
-                            <td>
-                              <div className={styles.synergyText}>
-                                <img className={styles.allianceImg} alt={key} src={`${process.env.PUBLIC_URL}/images/alliances/${key}.jpg`} />
-                                {underlordsLoc[`dac_synergy_${key}`]}
-                              </div>
-                            </td>
-                            <td>{count}</td>
-                            <td>{level ? <div>{`(${levelUnitCount}) ${underlordsLoc[`dac_synergy_desc_${key}_${level}`]}`}</div> : null}</td>
-                          </tr>)
-                      })
-                    }
-                  </tbody>
-                </table>
+                <div className={styles.synergiesContainer}>
+                  {
+                    Object.keys(this.state.synergies).map(key => 
+                      <Synergy 
+                      synergy={key} 
+                      count={this.state.synergies[key].count} 
+                      level={this.state.synergies[key].level}
+                      levelUnitCount={this.state.synergies[key].levelUnitCount}
+                      />
+                    )
+                  }
+                </div>
               </div>    
           </div>
         </div>

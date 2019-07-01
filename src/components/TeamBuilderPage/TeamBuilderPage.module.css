@@ -5,29 +5,6 @@
     margin-top: 40px;
 }
 
-.teamBuilderPageContainer table {
-    border: 1px solid rgba(255,255,255,0.05);
-    background-color: rgba(255, 255, 255, 0.05);
-    box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px 0px;
-}
-
-.teamBuilderPageContainer thead {
-    background-color: rgb(46, 70, 90);
-}
-
-.teamBuilderPageContainer table td, th {
-    font-size: 15px;
-    padding: 10px;
-}
-
-.teamBuilderPageContainer table th {
-    font-weight: 550;
-}
-
-.teamBuilderPageContainer table thead, tr {
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
 .heroesSelectionArea {
     display: flex;
     flex-basis: 306px;
@@ -130,6 +107,79 @@ input[type="text"], textarea {
     white-space: nowrap;
     display: flex;
     align-items: center;
+}
+
+.synergiesContainer {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap; 
+}
+
+.activeAllianceContainerOuter {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+    padding: 10px;
+}
+
+.activeAllianceContainer {
+    display: inline-flex;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: fit-content;
+}
+
+.allianceImgContainer {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    width: fit-content;
+}
+
+.activeAllianceContainer img {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+    vertical-align: bottom;
+    border-radius: 10%;
+}
+
+.allianceTiersContainer {
+    display: inline-flex;
+}
+
+
+.allianceTier {
+    display:  inline-flex;
+    flex-direction: column;
+    height: 100%;
+    width: 20px;
+    justify-content: space-around;
+}
+
+.tierCount {
+  width: 20px;
+  height : 20px;
+  background: blue;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.29);
+  flex-grow: 1;
+}
+
+.tierCount.activeCount {
+    width: 20px;
+    height : 20px;
+    background: radial-gradient(ellipse at 50% 40%, rgba(242, 242, 242, 0.62) 0%, rgba(237, 237, 237, 0.2) 100%)
+  }
+
+.synergyDescription {
+    font-size: 12px;
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.61);
+    text-align: center;
 }
 
 @media (max-width: 830px) {
