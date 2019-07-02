@@ -32,5 +32,7 @@
     "th_synergy": "Synergy",
     "th_bonus": "Bonus",
 
-    "search_hero": "Search for hero..."
+    "search_hero": "Search for hero...",
+    "select": "Select",
+    "team": "Team"
 }

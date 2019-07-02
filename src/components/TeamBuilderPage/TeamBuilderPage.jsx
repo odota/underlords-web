@@ -87,7 +87,7 @@ export default class TeamBuilderPage extends React.Component {
   }
 
   handleHeroSelection = h => () => {
-    if(this.state.team.length < 10) {
+    if(this.state.team.length < 11) {
       this.setState({team: [...this.state.team, h.key]}, this.computeAlliances)
     }
     this.resetSearch();
@@ -108,7 +108,7 @@ export default class TeamBuilderPage extends React.Component {
       <div className={commonStyles.PageContainer}>
         <div className={styles.teamBuilderPageContainer}>
           <div className={styles.heroesSelectionArea}>
-            <h2 style={{marginLeft: 4, marginBottom: 16}} className={styles.title}>Select</h2>
+            <h2 style={{marginLeft: 4, marginBottom: 16}} className={styles.title}>{strings.select}</h2>
           <div className={styles.searchInputContainer}>
             <div className={styles.searchInput}>
               <span className={styles.searchIcon}>&#8981;</span>
@@ -120,7 +120,7 @@ export default class TeamBuilderPage extends React.Component {
               Object.keys(heroes)
               .map(h => heroes[h])
               .filter( h => new RegExp(this.state.searchValue, 'i').test(transformName(h.key)) && 
-                h.dota_unit_name.substring(0, "npc_dota_hero_".length) === "npc_dota_hero_")
+                h.dota_unit_name.startsWith("npc_dota_hero_"))
               .map(h =>
                 <img 
                 key={h.key} 
