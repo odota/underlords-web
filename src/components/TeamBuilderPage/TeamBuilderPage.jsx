@@ -133,7 +133,7 @@ export default class TeamBuilderPage extends React.Component {
             }
           </div>
           <div className={styles.teamArea}>
-            <h2 className={styles.title}>Team</h2>
+            <h2 className={styles.title}>{strings.team}</h2>
               <div className={styles.selectedHeroesArea}>
                 {
                   this.state.team.map((h, i) => {
