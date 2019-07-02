@@ -1,4 +1,5 @@
 import React from "react";
+import ReactTooltip from 'react-tooltip';
 import commonStyles from '../../common.module.css';
 import styles from './TeamBuilderPage.module.css';
 import heroes from 'underlordsconstants/build/underlords_heroes.json';
@@ -14,7 +15,7 @@ const Synergy = ({synergy, count, level, levelUnitCount}) => {
   return(
     <div className={styles.activeAllianceContainerOuter}>
       <div className={styles.activeAllianceContainer} style={{backgroundColor: `rgba(${alliance.color.split(' ').join(',')},.22)`}}>
-        <div className={styles.allianceImgContainer}>
+        <div className={styles.allianceImgContainer} data-tip={synergy} data-for="alliance" data-offset="{'top': 0, 'left': 250}">
           <img className={styles.allianceImg} alt={synergy} src={`${process.env.PUBLIC_URL}/images/alliances/${synergy}.jpg`} />
         </div>
         <div className={styles.allianceTiersContainer}>
@@ -79,7 +80,9 @@ export default class TeamBuilderPage extends React.Component {
         })
       })
     })
-    this.setState({synergies});
+    this.setState({synergies}, () => {
+      ReactTooltip.rebuild();
+    });
   }
 
   handleSearchChange = (e) => {
