@@ -15,7 +15,7 @@ const Synergy = ({synergy, count, level, levelUnitCount, handleAllianceFilter}) 
   const tiers = alliance.levels.map((level,i) => level.unitcount - (i > 0 ? alliance.levels[i-1].unitcount : 0));
   let c = count;
   return(
-    <div className={styles.activeAllianceContainerOuter}>
+    <div className={styles.activeAllianceContainerOuter} style={{backgroundColor: `rgba(${alliance.color.split(' ').join(',')},.03)`}}>
       <div className={styles.activeAllianceContainer} style={{backgroundColor: `rgba(${alliance.color.split(' ').join(',')},.22)`}}>
         <div className={styles.allianceImgContainer} data-tip={synergy} data-for="alliance" data-offset="{'top': 0, 'left': 250}">
           <img 
@@ -54,7 +54,6 @@ const AllianceFilter = ({handleAllianceFilter, filteredAlliances}) =>
     {
       Object.keys(alliances).filter(alliance => alliances[alliance].heroes.length > 0).map(alliance => 
         <img
-        className={styles.allianceFilterImg}
         className={`${styles.allianceFilterImg} ${filteredAlliances.indexOf(alliance) !== -1 ? styles.allianceFilterImgActive : null}`}
         alt={alliance} 
         src={`${process.env.PUBLIC_URL}/images/alliances/${alliance}.jpg`} 
@@ -71,9 +70,13 @@ export default class TeamBuilderPage extends React.Component {
 
   state = {
     searchValue: "",
-    team: [].concat(this.teamParsedFromQuery && this.teamParsedFromQuery.split(",")  || []),
+    team: [].concat((this.teamParsedFromQuery && this.teamParsedFromQuery.split(","))  || []),
     synergies: {},
     filteredAlliances: [],
+  }
+
+  componentDidMount() {
+    this.computeAlliances();
   }
 
   computeAlliances = () => {
@@ -147,7 +150,6 @@ export default class TeamBuilderPage extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return(
       <div className={commonStyles.PageContainer}>
         <div className={styles.teamBuilderPageContainer}>
