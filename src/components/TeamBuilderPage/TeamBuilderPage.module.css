@@ -112,7 +112,6 @@ input[type="text"], textarea {
 
 .synergiesContainer {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap; 
 }
 
@@ -124,7 +123,8 @@ input[type="text"], textarea {
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    margin-right: 8px;
 }
 
 .activeAllianceContainer {
