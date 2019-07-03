@@ -76,6 +76,7 @@ input[type="text"], textarea {
     margin-bottom: 15px;
     flex-direction: column;
     color: rgba(255, 255, 255, 0.6);
+    position: relative;
 }
 
 .heroImageTeamArea:hover {
@@ -205,6 +206,19 @@ input[type="text"], textarea {
 
 .allianceFilterImgActive {
     border: 1px solid pink;
+}
+
+.heroAllianceIconContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 13px;
+    top: 8px;
+}
+
+.heroAllianceIcon {
+    height: 21px;
+    width: 21px;
 }
 
 @media (max-width: 830px) {

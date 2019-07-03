@@ -201,6 +201,16 @@ export default class TeamBuilderPage extends React.Component {
                     const hero = heroes[h];
                     return(
                       <div className={styles.heroImageTeamAreaContainer}>
+                          <div className={styles.heroAllianceIconContainer}>
+                            {
+                              hero.keywords.split(" ").map(s => 
+                                <img className={styles.heroAllianceIcon} 
+                                alt={s} 
+                                src={`${process.env.PUBLIC_URL}/images/alliances/${s}.jpg`} 
+                                />
+                              )
+                            }
+                          </div>
                           <img 
                           key={hero.key + i}               
                           alt={hero.displayName}
