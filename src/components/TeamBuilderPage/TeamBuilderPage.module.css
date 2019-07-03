@@ -121,6 +121,7 @@ input[type="text"], textarea {
     align-items: center;
     width: 180px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .activeAllianceContainer {
@@ -135,6 +136,7 @@ input[type="text"], textarea {
     height: 50px;
     padding: 10px;
     width: fit-content;
+    cursor: pointer;
 }
 
 .activeAllianceContainer img {
@@ -182,6 +184,27 @@ input[type="text"], textarea {
     text-align: center;
 }
 
+.allianceFilterContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px 0px 12px 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 12px;
+    flex-basis: 100%;
+}
+
+.allianceFilterImg {
+    height: 24px;
+    width: 24px;
+    margin-left: 1px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.allianceFilterImgActive {
+    border: 1px solid pink;
+}
+
 @media (max-width: 830px) {
     .teamBuilderPageContainer {
         flex-wrap: wrap;
@@ -197,5 +220,9 @@ input[type="text"], textarea {
     }
     .heroesSelectionArea {
         flex-grow: 2;
+    }
+    .allianceFilterImg {
+        height: 35px;
+        width: 35px;
     }
 }

@@ -7,8 +7,10 @@ import alliances from 'underlordsconstants/build/underlords_alliances.json';
 import { GetHeroImage } from "../../utils";
 import { underlordsLoc } from '../Localization/Localization';
 import { strings } from './../Localization/Localization';
+import querystring from 'querystring';
 
-const Synergy = ({synergy, count, level, levelUnitCount}) => {
+// TODO: to unify this logic with /components/AllianceCard/AllianceCard.tsx
+const Synergy = ({synergy, count, level, levelUnitCount, handleAllianceFilter}) => {
   const alliance = alliances[synergy];
   const tiers = alliance.levels.map((level,i) => level.unitcount - (i > 0 ? alliance.levels[i-1].unitcount : 0));
   let c = count;
@@ -16,7 +18,12 @@ const Synergy = ({synergy, count, level, levelUnitCount}) => {
     <div className={styles.activeAllianceContainerOuter}>
       <div className={styles.activeAllianceContainer} style={{backgroundColor: `rgba(${alliance.color.split(' ').join(',')},.22)`}}>
         <div className={styles.allianceImgContainer} data-tip={synergy} data-for="alliance" data-offset="{'top': 0, 'left': 250}">
-          <img className={styles.allianceImg} alt={synergy} src={`${process.env.PUBLIC_URL}/images/alliances/${synergy}.jpg`} />
+          <img 
+          className={styles.allianceImg} 
+          alt={synergy} 
+          src={`${process.env.PUBLIC_URL}/images/alliances/${synergy}.jpg`} 
+          onClick={handleAllianceFilter(synergy)}
+          />
         </div>
         <div className={styles.allianceTiersContainer}>
           {
@@ -42,20 +49,31 @@ const Synergy = ({synergy, count, level, levelUnitCount}) => {
   )
 }
 
-function transformName(str) {
-  const splitStr = str.toLowerCase().split('_');
-  for (let i = 0; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
-  }
-  return splitStr.join(' '); 
-}
+const AllianceFilter = ({handleAllianceFilter, filteredAlliances}) => 
+  <div className={styles.allianceFilterContainer}>
+    {
+      Object.keys(alliances).filter(alliance => alliances[alliance].heroes.length > 0).map(alliance => 
+        <img
+        className={styles.allianceFilterImg}
+        className={`${styles.allianceFilterImg} ${filteredAlliances.indexOf(alliance) !== -1 ? styles.allianceFilterImgActive : null}`}
+        alt={alliance} 
+        src={`${process.env.PUBLIC_URL}/images/alliances/${alliance}.jpg`} 
+        onClick={handleAllianceFilter(alliance)}
+        title={underlordsLoc[`dac_synergy_${alliance}`]}
+        />
+      )
+    }   
+  </div>
 
 export default class TeamBuilderPage extends React.Component {
 
+  teamParsedFromQuery = querystring.parse(window.location.search.substring(1)).team;
+
   state = {
     searchValue: "",
-    team: [],
+    team: [].concat(this.teamParsedFromQuery && this.teamParsedFromQuery.split(",")  || []),
     synergies: {},
+    filteredAlliances: [],
   }
 
   computeAlliances = () => {
@@ -83,6 +101,16 @@ export default class TeamBuilderPage extends React.Component {
     this.setState({synergies}, () => {
       ReactTooltip.rebuild();
     });
+    this.updateQueryString();
+  }
+
+  updateQueryString = () => {
+    const { team } = this.state;
+    window.history.replaceState(
+      '',
+      '',
+      `?team=${team.join()}`,
+    );
   }
 
   handleSearchChange = (e) => {
@@ -102,11 +130,24 @@ export default class TeamBuilderPage extends React.Component {
     this.setState({team}, this.computeAlliances)
   }
 
+  handleAllianceFilter = alliance => () => {
+    const { filteredAlliances } = this.state;
+    const index = filteredAlliances.indexOf(alliance);
+
+    if(index === -1) {
+      filteredAlliances.push(alliance);
+    } else {
+      filteredAlliances.splice(index, 1);
+    }
+    this.setState(filteredAlliances);
+  }
+
   resetSearch = () => {
     this.setState({searchValue: ""});
   }
 
   render() {
+    console.log(this.state)
     return(
       <div className={commonStyles.PageContainer}>
         <div className={styles.teamBuilderPageContainer}>
@@ -119,11 +160,25 @@ export default class TeamBuilderPage extends React.Component {
               </input>
             </div>
           </div>
+          <AllianceFilter handleAllianceFilter={this.handleAllianceFilter} filteredAlliances={this.state.filteredAlliances}/>
             {
               Object.keys(heroes)
               .map(h => heroes[h])
-              .filter( h => new RegExp(this.state.searchValue, 'i').test(transformName(h.key)) && 
+              .filter( h => new RegExp(this.state.searchValue, 'i').test(underlordsLoc[`${h.displayName}`]) && 
                 h.dota_unit_name.startsWith("npc_dota_hero_"))
+              .filter(h => {
+                const { filteredAlliances } = this.state;
+                if(filteredAlliances.length === 0) {
+                  return true;
+                }
+                const heroAlliances = h.keywords.split(" ");
+                for(let i = 0; i < heroAlliances.length; i++) {
+                  if(filteredAlliances.indexOf(heroAlliances[i]) !== -1) {
+                    return true;
+                  }
+                }
+                return false;
+              })
               .map(h =>
                 <img 
                 key={h.key} 
@@ -131,6 +186,7 @@ export default class TeamBuilderPage extends React.Component {
                 alt={h.displayName} 
                 src={GetHeroImage(h.dota_unit_name)}
                 onClick={this.handleHeroSelection(h)}
+                title={underlordsLoc[`${h.displayName}`]}
                 />
               )             
             }
@@ -150,7 +206,7 @@ export default class TeamBuilderPage extends React.Component {
                           src={GetHeroImage(hero.dota_unit_name)}
                           onClick={this.handleHeroDeSelection(i)}
                           />
-                          <div className={styles.heroName}>{transformName(h)}</div>
+                          <div className={styles.heroName}>{underlordsLoc[`${hero.displayName}`]}</div>
                       </div>
                     )
                   })
@@ -160,12 +216,15 @@ export default class TeamBuilderPage extends React.Component {
                 <h2 className={styles.title}>{underlordsLoc['dac_ingame_tab_synergies']}</h2>
                 <div className={styles.synergiesContainer}>
                   {
-                    Object.keys(this.state.synergies).map(key => 
+                    Object.keys(this.state.synergies)
+                    .sort((a, b) => this.state.synergies[b].level-this.state.synergies[a].level)
+                    .map(key => 
                       <Synergy 
                       synergy={key} 
                       count={this.state.synergies[key].count} 
                       level={this.state.synergies[key].level}
                       levelUnitCount={this.state.synergies[key].levelUnitCount}
+                      handleAllianceFilter={this.handleAllianceFilter}
                       />
                     )
                   }
