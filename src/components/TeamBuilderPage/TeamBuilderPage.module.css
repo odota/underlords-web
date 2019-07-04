@@ -122,9 +122,12 @@ input[type="text"], textarea {
     width: 180px;
     padding: 10px;
     cursor: pointer;
-    border-radius: 5px;
+    
     margin-bottom: 8px;
     margin-right: 8px;
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 3px 8px 0px;
+    background-color: rgba(255, 255, 255, 0.03);
 }
 
 .activeAllianceContainer {

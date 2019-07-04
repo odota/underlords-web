@@ -15,7 +15,7 @@ const Synergy = ({synergy, count, level, levelUnitCount, handleAllianceFilter}) 
   const tiers = alliance.levels.map((level,i) => level.unitcount - (i > 0 ? alliance.levels[i-1].unitcount : 0));
   let c = count;
   return(
-    <div className={styles.activeAllianceContainerOuter} style={{backgroundColor: `rgba(${alliance.color.split(' ').join(',')},.03)`}}>
+    <div className={styles.activeAllianceContainerOuter}>
       <div className={styles.activeAllianceContainer} style={{backgroundColor: `rgba(${alliance.color.split(' ').join(',')},.22)`}}>
         <div className={styles.allianceImgContainer} data-tip={synergy} data-for="alliance" data-offset="{'top': 0, 'left': 250}">
           <img 
