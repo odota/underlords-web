@@ -27,6 +27,8 @@
     "page_alliances_description": "View all Dota Underlords alliances, synergies, descriptions, and effects. Find the best hero combos!",
     "page_heroes_description": "View all Dota Underlords heroes, stats, descriptions, and abilities. Find the best heroes!",
     "page_items_description": "View all Dota Underlords items, stats, descriptions, and effects. Find the best items!",
+    "page_team_builder_title": "Team Builder",
+    "page_team_builder_description": "Theory-craft and simulate team compositions with the OpenUnderlords team builder for Dota Underlords. Make and share the best team!",
 
     "th_count": "Count",
     "th_synergy": "Synergy",

@@ -8,6 +8,7 @@ import { GetHeroImage } from "../../utils";
 import { underlordsLoc } from '../Localization/Localization';
 import { strings } from './../Localization/Localization';
 import querystring from 'querystring';
+import Helmet from 'react-helmet';
 
 // TODO: to unify this logic with /components/AllianceCard/AllianceCard.tsx
 const Synergy = ({synergy, count, level, levelUnitCount, handleAllianceFilter}) => {
@@ -152,6 +153,11 @@ export default class TeamBuilderPage extends React.Component {
   render() {
     return(
       <div className={commonStyles.PageContainer}>
+        <Helmet>
+            <title>{strings.page_team_builder_title} | {strings.app_name} | {strings.app_description}</title>
+            <meta name="description" content={strings.page_team_builder_description} />
+            <meta name="og:description" content={strings.page_team_builder_description} />
+        </Helmet>
         <div className={styles.teamBuilderPageContainer}>
           <div className={styles.heroesSelectionArea}>
             <h2 style={{marginLeft: 4, marginBottom: 16}} className={styles.title}>{strings.select}</h2>
