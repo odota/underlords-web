@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
-import IconLanguage from 'material-ui/svg-icons/action/language';
+import IconLanguage from 'material-ui/svg-icons/action/translate';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import Bug from 'material-ui/svg-icons/action/bug-report';
 import styled from 'styled-components';
@@ -152,7 +152,7 @@ class Header extends React.Component {
             <LogoGroup/>
             <LinkGroup />
           </VerticalAlignDiv>
-          <VerticalAlignDiv style={{ marginLeft: 'auto', marginRight: '5px' }}>
+          <VerticalAlignDiv style={{ marginLeft: 'auto', marginRight: '10px' }}>
             <MediaQuery minDeviceWidth={768}>
               <ReportBug />
             </MediaQuery>

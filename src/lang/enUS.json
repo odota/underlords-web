@@ -12,6 +12,7 @@
     "app_gravitech": "A Gravitech LLC Site",
     "app_github": "Github",
     "app_report_bug": "BUG!? Report dat!",
+    "app_team_builder": "Team Builder",
 
     "install_header": "Add to Home Screen?",
     "install_description": "Just like Underlords, OpenUnderlords works offline. Access guides and stats wherever you are.",
@@ -25,6 +26,13 @@
 
     "page_alliances_description": "View all Dota Underlords alliances, synergies, descriptions, and effects. Find the best hero combos!",
     "page_heroes_description": "View all Dota Underlords heroes, stats, descriptions, and abilities. Find the best heroes!",
-    "page_items_description": "View all Dota Underlords items, stats, descriptions, and effects. Find the best items!"
+    "page_items_description": "View all Dota Underlords items, stats, descriptions, and effects. Find the best items!",
 
+    "th_count": "Count",
+    "th_synergy": "Synergy",
+    "th_bonus": "Bonus",
+
+    "search_hero": "Search for hero...",
+    "select": "Select",
+    "team": "Team"
 }
