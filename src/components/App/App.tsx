@@ -16,6 +16,7 @@ import HomePage from '../HomePage/HomePage';
 import { Helmet } from 'react-helmet';
 import { generateURL, SUPPORTED_LANGUAGES } from '../../utils';
 import FourOFourPage from '../FourOFourPage/FourOFourPage';
+import TeamBuilderPage from '../TeamBuilderPage/TeamBuilderPage';
 
 type MatchParams = {
   [lang: string]: string
@@ -53,6 +54,10 @@ export default class App extends React.Component<RouteComponentProps> {
     {
       to: generateURL('items'),
       name: "dac_ingame_tab_items"
+    },
+    {
+      to: generateURL('builder'),
+      name: "app_team_builder"
     }
   ];
 
@@ -104,7 +109,7 @@ export default class App extends React.Component<RouteComponentProps> {
             }
         </Helmet>
         <Header {...this.props.match} navbarPages={this.navbarPages.map((e: {to: string, name: string}, i: number) => {
-          return <Link key={i} to={e.to}>{e.name.startsWith("dac") ? underlordsLoc[e.name] : e.name}</Link>
+          return <Link key={i} to={e.to}>{e.name.startsWith("dac") ? underlordsLoc[e.name] : strings[e.name] || e.name}</Link>
         })} />
           <Switch>
             <Route exact path={`${this.props.match.path}/`} component={HomePage}/>
@@ -113,6 +118,7 @@ export default class App extends React.Component<RouteComponentProps> {
                   <Route path={`${this.props.match.path}/alliances`} component={AlliancesPage}/>
                   <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
                   <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
+                  <Route path={`${this.props.match.path}/builder`} component={TeamBuilderPage} />
                   <Route component={FourOFourPage} />
                 </Switch>
             </div>
