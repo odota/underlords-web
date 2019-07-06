@@ -112,7 +112,8 @@ input[type="text"], textarea {
 
 .synergiesContainer {
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .activeAllianceContainerOuter {
@@ -217,6 +218,7 @@ input[type="text"], textarea {
     flex-direction: column;
     right: 13px;
     top: 8px;
+    pointer-events: none;
 }
 
 .heroAllianceIcon {
@@ -243,5 +245,21 @@ input[type="text"], textarea {
     .allianceFilterImg {
         height: 35px;
         width: 35px;
+    }
+}
+
+@media (max-width: 450px) {
+    .activeAllianceContainerOuter {
+        flex-basis: 100%;
+        flex-direction: row;
+    }
+    .selectedHeroesArea {
+        justify-content: space-around;
+    }
+    .synergyDescription {
+        margin-left: 10px;
+    }
+    .heroImageTeamAreaContainer {
+        width: auto;
     }
 }
