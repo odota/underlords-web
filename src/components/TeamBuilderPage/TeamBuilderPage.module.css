@@ -113,7 +113,6 @@ input[type="text"], textarea {
 .synergiesContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 .activeAllianceContainerOuter {
@@ -255,6 +254,9 @@ input[type="text"], textarea {
     }
     .selectedHeroesArea {
         justify-content: space-around;
+    }
+    .synergiesContainer {
+        justify-content: center;
     }
     .synergyDescription {
         margin-left: 10px;
