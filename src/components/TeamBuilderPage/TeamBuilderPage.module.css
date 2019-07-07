@@ -118,14 +118,15 @@ input[type="text"], textarea {
 }
 
 .activeAllianceContainerOuter {
+    position: relative;
     display: inline-flex;
     align-items: center;
     width: 180px;
     cursor: pointer;
     box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px 0px;
-    flex-basis: 307px;
-    margin-bottom: 10px;
+    flex-basis: 100%;
+    margin-bottom: 5px;
     padding: 10px;
     background: rgba(255, 255, 255, 0.03);
     justify-content: space-between;
@@ -147,15 +148,14 @@ input[type="text"], textarea {
     width: fit-content;
     cursor: pointer;
     line-height: 0px;
-    padding: 5px;
 }
 
 .activeAllianceContainer img {
     display: inline;
     width: auto;
     vertical-align: bottom;
-    height: 50px;
-    width: 50px;
+    height: 35px;
+    width: 35px;
     margin: 0px auto;
 }
 
@@ -169,7 +169,7 @@ input[type="text"], textarea {
     flex-direction: column;
     width: 10px;
     justify-content: space-around;
-    height: 60px;
+    height: 35px;
 }
 
 .tierCount {
@@ -192,7 +192,8 @@ input[type="text"], textarea {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.81);
     font-weight: 550;
-    width: 187px;
+    position: absolute;
+    left: 85px;
 }
 
 .synergyDescription.nonActive {
