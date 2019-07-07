@@ -123,14 +123,9 @@ input[type="text"], textarea {
     cursor: pointer;
     box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px 0px;
-    background-color: rgba(255, 255, 255, 0.03);
     flex-basis: 49%;
     margin-bottom: 10px;
     padding: 10px;
-}
-
-.activeAllianceContainerOuter.active {
-    background-color: rgba(255, 255, 255, 0.10);
 }
 
 .activeAllianceContainer {
@@ -153,6 +148,7 @@ input[type="text"], textarea {
     width: auto;
     vertical-align: bottom;
     height: 50px;
+    width: 50px;
     margin: 0px auto;
 }
 
@@ -187,8 +183,14 @@ input[type="text"], textarea {
 
 .synergyDescription {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.61);
+    color: rgba(255, 255, 255, 0.81);
     margin-left: 10px;
+    font-weight: 550;
+}
+
+.synergyDescription.nonActive {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: normal;
 }
 
 .allianceFilterContainer {
