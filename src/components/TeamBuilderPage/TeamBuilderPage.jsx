@@ -10,15 +10,12 @@ import { strings } from './../Localization/Localization';
 import querystring from 'querystring';
 
 // TODO: to unify this logic with /components/AllianceCard/AllianceCard.tsx
-const Synergy = ({synergy, count, level, levelUnitCount, handleAllianceFilter}) => {
+const Synergy = ({synergy, count, level, handleAllianceFilter}) => {
   const alliance = alliances[synergy];
   const tiers = alliance.levels.map((level,i) => level.unitcount - (i > 0 ? alliance.levels[i-1].unitcount : 0));
   let c = count;
   return(
-    <div 
-    className={styles.activeAllianceContainerOuter}
-    style={{background: level > 0 ? `radial-gradient(ellipse at 50% 80%, rgba(134, 233, 255, 0.17), rgba(255, 255, 255, 0.1))` : 'rgba(255, 255, 255, 0.03'}}
-    >
+    <div className={`${styles.activeAllianceContainerOuter} ${level > 0 ? styles.active : null}`}>
       <div className={styles.activeAllianceContainer} style={{backgroundColor: `rgba(${alliance.color.split(' ').join(',')},.22)`}}>
         <div className={styles.allianceImgContainer} data-tip={synergy} data-for="alliance" data-offset="{'top': 0, 'left': 250}">
           <img 
@@ -49,7 +46,7 @@ const Synergy = ({synergy, count, level, levelUnitCount, handleAllianceFilter}) 
       </div>
     {level ? 
       <div className={styles.synergyDescription}>
-        {`(${levelUnitCount}) ${underlordsLoc[`dac_synergy_desc_${synergy}_${level}`]}`}
+        {`(${tiers[level-1]}) ${underlordsLoc[`dac_synergy_desc_${synergy}_${level}`]}`}
       </div> 
     : 
       <div className={`${styles.synergyDescription} ${styles.nonActive}`}>
@@ -105,7 +102,6 @@ export default class TeamBuilderPage extends React.Component {
               alliance.levels.forEach((level, index) => {
                 if(synergies[alliance.key].count >= level.unitcount) {
                   synergies[alliance.key].level = index + 1;
-                  synergies[alliance.key].levelUnitCount = level.unitcount;
                 }
               })       
             }

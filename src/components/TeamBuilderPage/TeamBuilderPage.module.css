@@ -18,6 +18,7 @@
     width: 100%;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgba(255,255,255,0.81);
 }
 
 .heroImageSelectionArea {
@@ -123,9 +124,15 @@ input[type="text"], textarea {
     cursor: pointer;
     box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px 0px;
-    flex-basis: 49%;
+    flex-basis: 307px;
     margin-bottom: 10px;
     padding: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    justify-content: space-between;
+}
+
+.activeAllianceContainerOuter.active {
+    background: radial-gradient(ellipse at 50% 80%, rgba(134, 233, 255, 0.17), rgba(255, 255, 255, 0.1));
 }
 
 .activeAllianceContainer {
@@ -184,13 +191,14 @@ input[type="text"], textarea {
 .synergyDescription {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.81);
-    margin-left: 10px;
     font-weight: 550;
+    width: 187px;
 }
 
 .synergyDescription.nonActive {
     color: rgba(255, 255, 255, 0.5);
     font-weight: normal;
+    text-shadow: none;
 }
 
 .allianceFilterContainer {
@@ -235,6 +243,9 @@ input[type="text"], textarea {
     .teamBuilderPageContainer {
         flex-wrap: wrap;
     }
+    .synergiesContainer {
+        justify-content: center;
+    }
     .teamArea { 
         margin-left: 0px;
         padding-left:0px;
@@ -251,16 +262,6 @@ input[type="text"], textarea {
 }
 
 @media (max-width: 450px) {
-    .activeAllianceContainerOuter {
-        flex-basis: 100%;
-        flex-direction: row;
-    }
-    .synergiesContainer {
-        justify-content: center;
-    }
-    .synergyDescription {
-        margin-left: 10px;
-    }
     .heroImageTeamAreaContainer {
         width: auto;
     }
