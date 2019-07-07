@@ -113,21 +113,24 @@ input[type="text"], textarea {
 .synergiesContainer {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .activeAllianceContainerOuter {
     display: inline-flex;
-    flex-direction: column;
     align-items: center;
     width: 180px;
-    padding: 10px;
     cursor: pointer;
-    
-    margin-bottom: 8px;
-    margin-right: 8px;
     box-sizing: border-box;
-    box-shadow: rgba(0, 0, 0, 0.20) 0px 3px 8px 0px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px 0px;
     background-color: rgba(255, 255, 255, 0.03);
+    flex-basis: 49%;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.activeAllianceContainerOuter.active {
+    background-color: rgba(255, 255, 255, 0.10);
 }
 
 .activeAllianceContainer {
@@ -135,23 +138,22 @@ input[type="text"], textarea {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     width: fit-content;
+    align-items: center;
 }
 
 .allianceImgContainer {
-    width: 50px;
-    height: 50px;
-    padding: 10px;
     width: fit-content;
     cursor: pointer;
+    line-height: 0px;
+    padding: 5px;
 }
 
 .activeAllianceContainer img {
     display: inline;
-    margin: 0 auto;
-    height: 100%;
     width: auto;
     vertical-align: bottom;
-    border-radius: 10%;
+    height: 50px;
+    margin: 0px auto;
 }
 
 .allianceTiersContainer {
@@ -160,15 +162,15 @@ input[type="text"], textarea {
 
 
 .allianceTier {
-    display:  inline-flex;
+    display: inline-flex;
     flex-direction: column;
-    height: 100%;
-    width: 20px;
+    width: 10px;
     justify-content: space-around;
+    height: 60px;
 }
 
 .tierCount {
-  width: 20px;
+  width: 10px;
   height : 20px;
   background: blue;
   border: 1px solid rgba(0, 0, 0, 0.4);
@@ -178,16 +180,15 @@ input[type="text"], textarea {
 }
 
 .tierCount.activeCount {
-    width: 20px;
+    width: 10pxpx;
     height : 20px;
     background: radial-gradient(ellipse at 50% 40%, rgba(242, 242, 242, 0.62) 0%, rgba(237, 237, 237, 0.2) 100%)
   }
 
 .synergyDescription {
     font-size: 12px;
-    margin-top: 5px;
     color: rgba(255, 255, 255, 0.61);
-    text-align: center;
+    margin-left: 10px;
 }
 
 .allianceFilterContainer {
@@ -251,9 +252,6 @@ input[type="text"], textarea {
     .activeAllianceContainerOuter {
         flex-basis: 100%;
         flex-direction: row;
-    }
-    .selectedHeroesArea {
-        justify-content: space-around;
     }
     .synergiesContainer {
         justify-content: center;
