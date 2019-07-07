@@ -53,7 +53,7 @@ const Synergy = ({synergy, count, level, levelUnitCount, handleAllianceFilter}) 
       </div> 
     : 
       <div className={`${styles.synergyDescription} ${styles.nonActive}`}>
-        {`${underlordsLoc[`dac_synergy_desc_${synergy}_1`]}`}
+        {`(${tiers[0]}) ${underlordsLoc[`dac_synergy_desc_${synergy}_1`]}`}
       </div> 
     }
   </div>
