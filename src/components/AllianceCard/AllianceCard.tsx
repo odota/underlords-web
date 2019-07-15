@@ -21,7 +21,7 @@ export default class AllianceCard extends React.Component<{ alliance: Alliance }
 
     return <div className={commonStyles.Card}>
         <div className={commonStyles.CardCapSmallImage}>
-          <img alt={alliance.name} src={`${process.env.PUBLIC_URL}/images/alliances/${alliance.key}.jpg`} />
+          <img alt={alliance.name} src={`${process.env.PUBLIC_URL}/images/alliances/${alliance.key}.png`} />
           <h1 className={commonStyles.Title}>{underlordsLoc[`dac_synergy_${alliance.key}`]}</h1>
         </div>
         <div className={commonStyles.CardBody}>

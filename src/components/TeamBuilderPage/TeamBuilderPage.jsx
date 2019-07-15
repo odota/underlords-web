@@ -219,7 +219,7 @@ export default class TeamBuilderPage extends React.Component {
                               hero.keywords.split(" ").map(s => 
                                 <img className={styles.heroAllianceIcon} 
                                 alt={s} 
-                                src={`${process.env.PUBLIC_URL}/images/alliances/${s}.jpg`} 
+                                src={`${process.env.PUBLIC_URL}/images/alliances/${s}.png`} 
                                 />
                               )
                             }
