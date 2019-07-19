@@ -22,7 +22,7 @@ const Synergy = ({synergy, count, level, handleAllianceFilter}) => {
           <img 
           className={styles.allianceImg} 
           alt={synergy} 
-          src={`${process.env.PUBLIC_URL}/images/alliances/${synergy}.jpg`} 
+          src={`${process.env.PUBLIC_URL}/images/alliances/${synergy}.png`} 
           onClick={handleAllianceFilter(synergy)}
           />
         </div>
@@ -65,7 +65,7 @@ const AllianceFilter = ({handleAllianceFilter, filteredAlliances}) =>
         <img
         className={`${styles.allianceFilterImg} ${filteredAlliances.indexOf(alliance) !== -1 ? styles.allianceFilterImgActive : null}`}
         alt={alliance} 
-        src={`${process.env.PUBLIC_URL}/images/alliances/${alliance}.jpg`} 
+        src={`${process.env.PUBLIC_URL}/images/alliances/${alliance}.png`} 
         onClick={handleAllianceFilter(alliance)}
         title={underlordsLoc[`dac_synergy_${alliance}`]}
         />
@@ -219,7 +219,7 @@ export default class TeamBuilderPage extends React.Component {
                               hero.keywords.split(" ").map(s => 
                                 <img className={styles.heroAllianceIcon} 
                                 alt={s} 
-                                src={`${process.env.PUBLIC_URL}/images/alliances/${s}.jpg`} 
+                                src={`${process.env.PUBLIC_URL}/images/alliances/${s}.png`} 
                                 />
                               )
                             }

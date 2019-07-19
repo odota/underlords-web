@@ -38,7 +38,7 @@ export default class HomePage extends React.Component<RouteComponentProps> {
                         <Collage urls={this.state.alliances.map((e) => {
                             return {
                                 alt: e,
-                                url: `${process.env.PUBLIC_URL}/images/alliances/${e}.jpg`
+                                url: `${process.env.PUBLIC_URL}/images/alliances/${e}.png`
                             };
                         })}/>
                         <h4>{underlordsLoc["dac_ingame_tab_synergies"]}</h4>

@@ -84,7 +84,7 @@ export default class HeroCard extends React.Component<{ hero: Hero, highlight?: 
                                     data-for="alliance"
                                     className={styles.AllianceIcon}
                                     alt={keyword}
-                                    src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.jpg`}
+                                    src={`${process.env.PUBLIC_URL}/images/alliances/${keyword}.png`}
                                 />
                             </div>;
                         }) 
