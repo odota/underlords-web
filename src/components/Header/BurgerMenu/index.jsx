@@ -36,7 +36,7 @@ export default class BurgerMenu extends React.Component {
         </IconButton>
         <StyledDrawer
           docked={false}
-          width={260}
+          width={280}
           open={this.state.open}
           onRequestChange={open => this.setState({ open })}
         >
