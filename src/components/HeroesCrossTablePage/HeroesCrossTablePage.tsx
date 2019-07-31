@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import heroes from 'underlordsconstants/build/underlords_heroes.json';
 import commonStyles from '../../common.module.css';
+import styles from './HeroesCrossTablePage.module.css';
 import { Hero } from '../../types';
-import HeroCard from '../HeroCard/HeroCard';
 import ReactTooltip from 'react-tooltip';
 import { alliances, underlordsLoc, strings } from '../Localization/Localization';
 import SortButtons from '../SortButtons/SortButtons';
 import Helmet from 'react-helmet';
+import { GetHeroImage } from '../../utils';
 
 export default function HeroesCrossTablePage() {
 
@@ -24,40 +25,73 @@ export default function HeroesCrossTablePage() {
       }
     }
 
-    // const cross: { [index: string]: { [index: string]: string[]}}= {};
-
     function addPair(heroKey: string, firstAll: string, secAll: string) {
       const i = allianceIndex.findIndex((e) => e === firstAll);
       const j = allianceIndex.findIndex((e) => e === secAll);
 
-      cross[i][j].push(heroKey);
-      // if (firstAll in cross) {
-      //   if (secAll in cross[firstAll]) {
-      //     cross[firstAll][secAll].push(heroKey);
-      //   } else {
-      //     cross[firstAll][secAll] = [heroKey];
-      //   }
-      // } else {
-      //   cross[firstAll] = {
-      //     [secAll]: [heroKey]
-      //   }
-      // }
+      // Get number of heroes in this row
+      const rowCounti = cross[i].reduce((prev, elem) => {
+        return prev + elem.length;
+      }, 0);
+
+      const columnCounti = cross.reduce((prev, elem) => {
+        return prev + elem[j].length
+      }, 0);
+
+      const rowCountj = cross[j].reduce((prev, elem) => {
+        return prev + elem.length;
+      }, 0);
+
+      const columnCountj = cross.reduce((prev, elem) => {
+        return prev + elem[i].length
+      }, 0);
+
+      if (rowCounti + columnCounti >= rowCountj + columnCountj) {
+        cross[i][j].push(heroKey);
+      } else {
+        cross[j][i].push(heroKey);
+      }
     }
+    
+    // sort by alliances with most heroes
+    const sortedAlliances = Object.keys(alliances).sort((a, b) => {
+      const first = alliances[a].heroes ? alliances[a].heroes.length : 0;
+      const second = alliances[b].heroes ? alliances[b].heroes.length : 0;
 
-    Object.entries(heroes).forEach(([heroKey, hero]) => {
-      if (hero.draftTier > 0 && hero.keywords) {
-        const alliances = hero.keywords.split(' ').sort();
-        if (alliances.length < 2) {
-          return;
-        }
+      if (first === second) {
+        return 0
+      } else {
+        return first > second ? 1 : -1;
+      }
+    }).reverse();
 
-        const [firstAll, ...rest] = alliances;
+    const processedHeroes: string[] = [];
 
-        rest.forEach((e) => {
-          addPair(heroKey, firstAll, e);
+    sortedAlliances.forEach((a) => {
+      const alliance = alliances[a];
+      if (alliance.heroes) {
+        alliance.heroes.forEach((hero: Hero) => {
+          if (processedHeroes.find((e) => e === hero.key)) {
+            return;
+          }
+
+          if (hero.draftTier > 0 && hero.keywords) {
+            const alliances = hero.keywords.split(' ').sort();
+            if (alliances.length < 2) {
+              return;
+            }
+    
+            const [firstAll, ...rest] = alliances;
+    
+            rest.forEach((e: string) => {
+              addPair(hero.key, firstAll, e);
+            })
+
+            processedHeroes.push(hero.key);
+          }
         })
       }
-    });
+    })
 
     console.log(cross);
     // Check which rows and columns are empty
@@ -86,7 +120,7 @@ export default function HeroesCrossTablePage() {
 
   const allianceIndex = Object.keys(alliances);
 
-  return <div>
+  return <div className={commonStyles.PageContainer}>
     <tbody>
     {crossAlliances && crossAlliances.map((a1: [][], i: number) => {
       if (emptyRows && emptyRows.find((e: number) => e === i)) {
@@ -96,14 +130,22 @@ export default function HeroesCrossTablePage() {
       return <tr>
         <td>{allianceIndex[i]}</td>
         {
-          a1.map((heroes, j) => {
+          a1.map((heroesArray, j) => {
             if (nonEmptyColumns && !nonEmptyColumns.find((e: number) => e === j)) {
               return <></>
             }
 
             return <td>
               { i === 0 && allianceIndex[j]} 
-              { heroes && heroes.toString()}
+              { heroesArray && heroesArray.map((key: keyof typeof heroes) => {
+                const hero = heroes[key];
+                return <img 
+                key={hero.key + i}               
+                alt={hero.displayName}
+                src={GetHeroImage(hero.dota_unit_name)}
+                className={styles.Image}
+                />
+              })}
             </td>
           })
         }
