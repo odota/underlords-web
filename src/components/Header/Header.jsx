@@ -107,10 +107,12 @@ class Header extends React.Component {
       children: <ActionSettings />,
     };
 
-    const LogoGroup = ({ small }) => (
+    const LogoGroup = () => (
       <VerticalAlignToolbar>
-        {!small && <BurgerMenu menuItems={burgerItems} />}
-        <AppLogo url={this.props.url} style={{ marginRight: 18 }} />
+        <MediaQuery maxDeviceWidth={768}>
+          <BurgerMenu menuItems={burgerItems} />
+        </MediaQuery>
+        <AppLogo url={this.props.url}/>
       </VerticalAlignToolbar>
     );
 
@@ -148,7 +150,7 @@ class Header extends React.Component {
     return (
       <div>
         <ToolbarHeader>
-          <VerticalAlignDiv>
+          <VerticalAlignDiv style={{ marginLeft: '10px' }}>
             <LogoGroup/>
             <LinkGroup />
           </VerticalAlignDiv>
