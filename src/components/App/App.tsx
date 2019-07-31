@@ -17,12 +17,14 @@ import { Helmet } from 'react-helmet';
 import { generateURL, SUPPORTED_LANGUAGES } from '../../utils';
 import FourOFourPage from '../FourOFourPage/FourOFourPage';
 import TeamBuilderPage from '../TeamBuilderPage/TeamBuilderPage';
-
+import { ServiceWorkerContext } from '../../context/ServiceWorkerContext';
 type MatchParams = {
   [lang: string]: string
 }
 
 export default class App extends React.Component<RouteComponentProps> {
+
+  static contextType = ServiceWorkerContext;
 
   state = {
     initializing: true,
@@ -77,6 +79,7 @@ export default class App extends React.Component<RouteComponentProps> {
       lang: lang
     });
 
+    // only triggered if not installed already
     window.addEventListener('beforeinstallprompt', (e) => {
       // Prevent Chrome 67 and earlier from automatically showing the prompt
       e.preventDefault();
@@ -88,6 +91,8 @@ export default class App extends React.Component<RouteComponentProps> {
   }
 
   public render() {
+    const { assetsUpdateReady, updateAssets } = this.context;
+
     return this.state.initializing ?
       <div/>
       : <div className={styles.AppContainer}>
@@ -124,7 +129,7 @@ export default class App extends React.Component<RouteComponentProps> {
             </div>
           </Switch>
         {
-          !this.state.doNotPromptInstall && this.state.showInstallPrompt ? 
+          !this.state.doNotPromptInstall && this.state.showInstallPrompt && 
           <div className={styles.UserPromptModule}>
             <div className={styles.UserPromptModuleContainer}>
               <div className={commonStyles.CardCapSmallImage}>
@@ -155,7 +160,25 @@ export default class App extends React.Component<RouteComponentProps> {
               </div>
             </div>
           </div>
-          : <div/>
+        }
+        {
+          assetsUpdateReady &&
+          <div className={styles.UserPromptModule}>
+            <div className={styles.UserPromptModuleContainer}>
+              <div className={commonStyles.CardCapSmallImage}>
+                <h3>There's an update to the site!</h3>
+              </div>
+              <div className={commonStyles.CardBody}>
+              <button
+                className={`${commonStyles.Button} ${styles.Primary}`}
+                onClick={(e) => {
+                  updateAssets();
+                }}>
+                <div>Refresh</div>
+              </button>
+              </div>
+            </div>
+          </div>
         }
         <ReactTooltip id="hero" place="right" className={commonStyles.Tooltip} effect="solid" getContent={ (dataTip) => {
           const hero: Hero = heroes[dataTip as keyof typeof heroes];
