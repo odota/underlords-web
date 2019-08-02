@@ -129,7 +129,7 @@ export default class App extends React.Component<RouteComponentProps> {
             </div>
           </Switch>
         {
-          !this.state.doNotPromptInstall && this.state.showInstallPrompt && 
+          !assetsUpdateReady && !this.state.doNotPromptInstall && this.state.showInstallPrompt && 
           <div className={styles.UserPromptModule}>
             <div className={styles.UserPromptModuleContainer}>
               <div className={commonStyles.CardCapSmallImage}>
