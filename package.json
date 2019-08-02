@@ -25,7 +25,7 @@
     "react-tooltip": "^3.10.0",
     "styled-components": "^4.3.2",
     "typescript": "3.5.2",
-    "underlordsconstants": "github:odota/underlordsconstants#f4146832d90d2d7cd44105ade2142fef18c3d706"
+    "underlordsconstants": "github:odota/underlordsconstants#aa1dee097f46da3b49ceae67047edee02f5bf946"
   },
   "scripts": {
     "start": "react-scripts start",
