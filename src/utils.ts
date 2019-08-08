@@ -41,6 +41,20 @@ export function StripHtml(html: string) {
    "tiếng việt": "vn",
  };
 
+ export function formatLanguages(){
+  let newObj = {} as any;
+
+  Object.entries(SUPPORTED_LANGUAGES).forEach(
+    ([key, value]) => {
+      newObj[key.charAt(0).toUpperCase() + key.slice(1)] = value;
+    }
+  );
+
+  console.log('in util');
+  console.log(newObj);
+  return newObj;
+ }
+
  export const GITHUB_ISSUES_LINK = '//github.com/odota/underlords-web/issues';
 
  export function generateURL(p: string) {
