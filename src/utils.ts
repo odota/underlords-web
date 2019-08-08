@@ -11,7 +11,6 @@ export function StripHtml(html: string) {
     return `${process.env.PUBLIC_URL}/images/portraits/${dotaName}_png.png`;
  }
 
- // TODO capitalize
  export const SUPPORTED_LANGUAGES = {
    "português do Brasil": "pt-BR",
    "български": "bg",
@@ -42,17 +41,14 @@ export function StripHtml(html: string) {
  };
 
  export function formatLanguages(){
-  let newObj = {} as any;
+  let nObj = {} as any;
 
   Object.entries(SUPPORTED_LANGUAGES).forEach(
     ([key, value]) => {
-      newObj[key.charAt(0).toUpperCase() + key.slice(1)] = value;
+      nObj[key.charAt(0).toUpperCase() + key.slice(1)] = value;
     }
   );
-
-  console.log('in util');
-  console.log(newObj);
-  return newObj;
+  return nObj;
  }
 
  export const GITHUB_ISSUES_LINK = '//github.com/odota/underlords-web/issues';
