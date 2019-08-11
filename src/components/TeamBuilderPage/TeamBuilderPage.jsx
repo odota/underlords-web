@@ -3,7 +3,7 @@ import ReactTooltip from 'react-tooltip';
 import commonStyles from '../../common.module.css';
 import styles from './TeamBuilderPage.module.css';
 import heroes from 'underlordsconstants/build/underlords_heroes.json';
-import alliances from 'underlordsconstants/build/underlords_alliances.json';
+import alliances from './../../modifiedImports/modifiedAlliances';
 import { GetHeroImage } from "../../utils";
 import { underlordsLoc } from '../Localization/Localization';
 import { strings } from './../Localization/Localization';
