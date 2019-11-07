@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuItem from 'material-ui/MenuItem';
 import styled from 'styled-components';
-import { SUPPORTED_LANGUAGES } from '../../utils';
+import { formatLanguages } from '../../utils';
 
 const LanguageContainerDiv = styled.div`
   max-height: 300px;
@@ -14,6 +14,8 @@ export default class LocalizationMenu extends React.Component {
     this.state = {
       open: false,
     };
+
+    this.formatLanguages = formatLanguages();
   }
 
   handleOnClick = (event) => {
@@ -28,8 +30,8 @@ export default class LocalizationMenu extends React.Component {
     return (
       <div style={{ minWidth: '200px' }}>
         <LanguageContainerDiv>
-          {Object.entries(SUPPORTED_LANGUAGES).map(([name, lang]) => (
-              <a href={`/${lang}/`}>
+          {Object.entries(this.formatLanguages).map(([name, lang]) => (
+              <a key={name} href={`/${lang}/`}>
                 <MenuItem
                     key={name}
                     primaryText={name}
