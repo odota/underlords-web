@@ -18,6 +18,7 @@ import { generateURL, SUPPORTED_LANGUAGES } from '../../utils';
 import FourOFourPage from '../FourOFourPage/FourOFourPage';
 import TeamBuilderPage from '../TeamBuilderPage/TeamBuilderPage';
 import { ServiceWorkerContext } from '../../context/ServiceWorkerContext';
+import HeroesCrossTablePage from '../HeroesCrossTablePage/HeroesCrossTablePage';
 type MatchParams = {
   [lang: string]: string
 }
@@ -59,6 +60,10 @@ export default class App extends React.Component<RouteComponentProps> {
     },
     {
       to: generateURL('builder'),
+      name: "app_team_builder"
+    },
+    {
+      to: generateURL('cross'),
       name: "app_team_builder"
     }
   ];
@@ -124,6 +129,7 @@ export default class App extends React.Component<RouteComponentProps> {
                   <Route path={`${this.props.match.path}/heroes`} component={HeroesPage}/>
                   <Route path={`${this.props.match.path}/items`} component={ItemsPage} />
                   <Route path={`${this.props.match.path}/builder`} component={TeamBuilderPage} />
+                  <Route path={`${this.props.match.path}/cross`} component={HeroesCrossTablePage} />
                   <Route component={FourOFourPage} />
                 </Switch>
             </div>
